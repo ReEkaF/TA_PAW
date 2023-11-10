@@ -1,0 +1,198 @@
+*{
+    margin:0 auto;
+    font-family: sans-serif;
+}
+
+
+/*====== SCROLL =======*/
+
+
+::-webkit-scrollbar 
+{
+    width: 10px;
+}
+
+
+::-webkit-scrollbar-track 
+{
+    background: #fff;
+}
+
+
+::-webkit-scrollbar-thumb 
+{
+    background: #D80064;
+    border-radius: 1rem;
+}
+
+
+::-webkit-scrollbar-thumb:hover 
+{
+    background: #243064;
+}
+
+
+
+
+  /* ===== STYLING ===== */
+
+.no-decoration
+{
+    text-decoration: none;
+}
+
+
+
+  /* ===== COLOR ===== */
+
+.primary-bg
+{
+    background-color: #243064;
+}
+.secondary-bg
+{
+    background-color: #D80064;
+}
+.light-bg
+{
+    background-color: #FDFDFD;
+}
+
+
+
+
+ /* ===== BUTTON ===== */
+.primary-btn
+{
+    background-color: #D80064;
+    color: #FDFDFD;
+    padding:0.5rem 1.5rem;
+    outline: none;
+    border-radius: 1rem;
+    border: none;
+}
+
+.primary-btn:hover
+{
+    opacity:0.8;
+}
+.primary-btn:active
+{
+    transform:scale(0.9);
+}
+
+
+
+ /* ===== INPUT FORM ===== */
+.input-form
+{
+    margin:1rem 0;
+}
+
+.input-form-title
+{
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+}
+
+
+ .input-form input
+{
+    border: #243064 solid 1px;
+    padding:0.5rem 1rem;
+    border-radius: 1rem;
+    box-sizing: border-box;
+}
+
+ .input-form select
+{
+    border: #243064 solid 1px;
+    padding:0.5rem 1rem;
+    border-radius: 1rem;
+    box-sizing: border-box;
+}
+
+
+
+/* ===== COMPONENTS ==== */
+.card-product
+{
+    display: inline-block;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+    min-width:17vw;
+}
+
+.card-product-container
+{
+    padding: 1rem;
+}
+
+
+.card-product-image
+{
+    width: 100%;
+    height:8rem;
+    border-radius: 1rem;
+}
+.card-product-title
+{
+    margin-top:1rem;
+    font-size: 1rem;
+}
+
+.card-product-price
+{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #D80064;
+}
+
+.card-product-info
+{
+    display: flexbox;
+    margin-top:1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-product-category
+{
+
+    font-size: 0.6rem;
+    border-radius: 1rem;
+    border: #D80064 1px solid;
+    color:#D80064;
+    padding:0.1rem 0.3rem;
+}
+
+.card-product-stock
+{
+    font-size: 0.6rem;
+}
+
+.table-style table
+{
+    width: 100%;
+}
+
+.table-style tr th
+{
+    color: #FDFDFD ;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #243064;
+    border-radius: 1rem;
+    padding:0.5rem 0.7rem;
+}
+.table-style tr td
+{
+    font-size: 0.8rem;
+    padding:1rem 0.7rem;
+}
+.table-style tr td:first-child
+{
+    font-size: 0.8rem;
+    padding:1rem 0.7rem;
+}
+
