@@ -3,13 +3,82 @@
     margin: 0;
     padding: 0;
 }
+/* HOMEPAGE */
+.home{
+    color: aliceblue;
+    justify-content: center;
+    text-align: center;
+    background-image: url(pict/flowersbg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.headerhome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(6, 143, 84);
+    height: 100px;
+}
+.headerhome img{
+    width: 80px;
+    flex: 0;
+    height: 80px;
+    margin-left: 20px;
+    margin-right: 75vw;
+}
+.lognregbox{
+    flex: 1;
+    width: 50%;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin: 20px;
+}
+.lognregbox a{
+    color: white;
+    margin: 20px;
+    text-decoration: none;
+}
+.teamhome{
+    text-align: center;
+    background-color: aliceblue;
+    padding: 50px;
+}
+.box-home{
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 200px;
+}
+.box-1{
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-bottom: 200px;
+}
+.box-1 p{
+    font-weight: bold;
+}
+.anoconthome-1{
+    background-image: url(pict/flowersbg6.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.anoconthome-2{
+    padding-left: 50px;
+    padding-top: 200px;
+    padding-bottom: 200px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-bottom: 200px;
+}
+.anoconthome-2 p{
+    width: 40vw;
+}
+/* AFTER-LOG */
 body{
     background-image: url(pict/flowersbg4.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
 .menu{
-    background-color: rgba(6, 143, 84, 0.5);
+    background-color: rgba(6, 143, 84);
     display: flex;
 }
 .headermenu{
@@ -25,9 +94,6 @@ body{
     flex: 0;
     margin: 20px;
 }
-.headerregis, .headerlogin{
-    margin-top: 0;
-}
 
 
 /* MAIN */
@@ -37,11 +103,13 @@ main{
     justify-content: space-around;
 }
 .maincont{
+    display: flex;
     justify-content: space-between;
     text-align: center;
-    background-color: rgba(6, 143, 84, 0.5);
+    background-color: rgba(6, 143, 84);
     padding: 10px 20px 10px 20px;
     width: 500px;
+    height: 100vh;
 }
 .field{
     display: flex;
@@ -71,3 +139,6 @@ label{
 span{
     color: red;
 }
+
+
+/* BERANDA */
