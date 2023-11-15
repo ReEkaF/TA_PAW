@@ -4,17 +4,29 @@
 ?>
 
 <?php require_once("layouts/header.php"); ?>
-<?php require_once("libs/validate-login.php")?>
-<fieldset>
-<legend>LOGIN</legend>
 
-<form action="login.php" method="GET">
-    <label for="email"> email :</label>
-    <input type="text" name="email" id="email"><br>
-    <label for="password"> Password :</label>
-    <input type="password" name="password" id="password"><br>
-    <input type="submit" value="LOGIN" name="submit">
-</form>
+<fieldset>
+    <legend>Login dengan akun anda</legend>
+    <form action="logi.php" method="GET">
+        <div class="field">
+            <div class="inlab">
+                <label for="email"> Email :</label>
+                <input type="text" name="email" id="email">
+            </div>
+            <span>*err msg</span>
+            <div class="inlab">
+                <label for="password"> Password :</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <span>*err msg</span>
+        </div>
+        <div class="toregis">
+            <a href="regis-master.php">Belum punya akun?</a>
+        </div>
+        <div class="fieldsub">
+            <input type="submit" value="LOGIN">
+        </div>
+    </form>
 </fieldset>
     
 <?php require_once("layouts/footer.php"); ?>

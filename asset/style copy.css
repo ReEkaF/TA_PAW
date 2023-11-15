@@ -21,7 +21,6 @@
     height: 100px;
 }
 .headerhome img{
-    width: 80px;
     flex: 0;
     height: 80px;
     margin-left: 20px;
@@ -73,13 +72,15 @@
 }
 /* AFTER-LOG */
 body{
-    background-image: url(pict/flowersbg4.jpg);
+    background-image: url(pict/flowersbg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
 .menu{
     background-color: rgba(6, 143, 84);
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .headermenu{
     display: flex;
@@ -89,10 +90,15 @@ body{
     align-items: flex-end;
     margin: 20px;
 }
+.headermenu a {
+    color: white;
+    margin: 20px;
+    text-decoration: none;
+}
 .headercont img{
     height: 100px;
     flex: 0;
-    margin: 20px;
+    margin: 10px 75vw 10px 20px;
 }
 
 
@@ -102,33 +108,38 @@ main{
     display: flex;
     justify-content: space-around;
 }
-.maincont{
+.mainsect{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.255);
+}
+.maincont{
     justify-content: space-between;
     text-align: center;
     background-color: rgba(6, 143, 84);
     padding: 10px 20px 10px 20px;
     width: 500px;
-    height: 100vh;
+    margin: 30vh 0 30vh 0;
 }
 .field{
-    display: flex;
     justify-content: space-between;
     text-align: left;
     margin: 5px 0 0 0;
 }
 label{
-    font-weight: bold;
+    color: white;
 }
 .field input{
     background-color: rgba(6, 143, 84, 0.0);
     border-left: none;
     border-top: none;
     border-right: none;
+    margin: 10px;
 }
 .fieldsub input{
-    background-color: #df90a8;
-    color: rgb(6, 143, 84, 0.5);
+    background-color: white;
+    color: rgb(6, 143, 84);
     border-style: none;
     padding: 5px;
     margin: 10px 5px 0 5px;
@@ -141,4 +152,24 @@ span{
 }
 
 
-/* BERANDA */
+/* LOGIN */
+fieldset{
+    border: none;
+}
+legend{
+    font-weight: bold;
+    color: aliceblue;
+    margin: 10px;
+}
+.toregis{
+    text-align: right;
+}
+.toregis a{
+    text-decoration: none;
+}
+
+/* REGISTRASI */
+fieldset select{
+    height: 30px;
+    margin: 0 0 50px 0;
+}

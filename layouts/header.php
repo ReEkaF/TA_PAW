@@ -19,5 +19,5 @@
     </header>
 
     <section>
-        <section>
+        <section class="mainsect">
             <div class="maincont">

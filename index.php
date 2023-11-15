@@ -11,7 +11,7 @@
         <img src="asset/pict/misminit.jpg" alt="">
         <div class="lognregbox">
             <a href="login.php">Login</a>
-            <a href="register.php">Registrasi</a>
+            <a href="regis-master.php">Registrasi</a>
         </div>
     </div>
     <div class="home">
