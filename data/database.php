@@ -1,147 +1,140 @@
-<?php 
-require_once("config/setup.php");
+<?php
 
-function getallplantcategoties() {
-    try{
-        $state= DB->query("SELECT * FROM categories");
-        $state-> execute();
-        return $state->fetchAll(PDO::FETCH_ASSOC);
-    }
-    catch(PDOException $err) {
-        echo $err->getMessage();
-    }
-}
-function getDataCategory($category_id) 
+require_once(__DIR__ . '/../config/setup.php');
+
+function getallplantcategoties()
 {
-	try{
-		$statement = DB->prepare("SELECT * FROM categories WHERE category_id = :category_id");
-		$statement->bindValue(':category_id',$category_id);
-		$statement->execute();
-		return $statement->fetch(PDO::FETCH_ASSOC);
-	}
-	catch(PDOException $err){
-		echo $err->getMessage();
-	}
+  try {
+    $state = DB->query("SELECT * FROM categories");
+    $state->execute();
+    return $state->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $err) {
+    echo $err->getMessage();
+  }
+}
+function getDataCategory($category_id)
+{
+  try {
+    $statement = DB->prepare("SELECT * FROM categories WHERE category_id = :category_id");
+    $statement->bindValue(':category_id', $category_id);
+    $statement->execute();
+    return $statement->fetch(PDO::FETCH_ASSOC);
+  } catch (PDOException $err) {
+    echo $err->getMessage();
+  }
 }
 
-function getCountplantByCategory($category_id) 
+function getCountplantByCategory($category_id)
 {
-	try{
-		$statement = DB->prepare("SELECT COUNT(*) AS jumlah_produk FROM plant WHERE category_id = :category_id");
-		$statement->bindValue(':category_id',$category_id);
-		$statement->execute();
-		return $statement->fetchAll(PDO::FETCH_ASSOC);
-	}
-	catch(PDOException $err){
-		echo $err->getMessage();
-	}
+  try {
+    $statement = DB->prepare("SELECT COUNT(*) AS jumlah_produk FROM plant WHERE category_id = :category_id");
+    $statement->bindValue(':category_id', $category_id);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $err) {
+    echo $err->getMessage();
+  }
 }
 function insertCategory($data)
-{ 
-    $kode = $data["kode"];
-	$kategori = $data["kategori"];
-	try{
-		$statement = DB->prepare("INSERT INTO categories VALUES(:kode,:kategori)");
-		$statement->bindValue(':kode',$kode);
-		$statement->bindValue(':kategori',$kategori);
-		$statement->execute();
-		header("location:manajemen_kategori.php");
-	}
-	catch(PDOException $err){
-		echo $err->getMessage();
-	}
+{
+  $kode = $data["kode"];
+  $kategori = $data["kategori"];
+  try {
+    $statement = DB->prepare("INSERT INTO categories VALUES(:kode,:kategori)");
+    $statement->bindValue(':kode', $kode);
+    $statement->bindValue(':kategori', $kategori);
+    $statement->execute();
+    header("location:manajemen_kategori.php");
+  } catch (PDOException $err) {
+    echo $err->getMessage();
+  }
 }
 
-function editCategory($data){
-	$kodeKat = $data["kodeKat"];
-	$namaKat = $data["namaKat"];
-	try{
-		$statement = DB->prepare("UPDATE categories SET category_name= :namaKat WHERE category_id= :kodeKat");
-		$statement->bindValue(':namaKat',$namaKat);
-		$statement->bindValue(':kodeKat',$kodeKat);
-		$statement->execute();
-		header("location:manajemen_kategori.php");
-	}
-	catch(PDOException $err){
-		echo "Update data kategori gagal";
-		echo $err->getMessage();
-	}
+function editCategory($data)
+{
+  $kodeKat = $data["kodeKat"];
+  $namaKat = $data["namaKat"];
+  try {
+    $statement = DB->prepare("UPDATE categories SET category_name= :namaKat WHERE category_id= :kodeKat");
+    $statement->bindValue(':namaKat', $namaKat);
+    $statement->bindValue(':kodeKat', $kodeKat);
+    $statement->execute();
+    header("location:manajemen_kategori.php");
+  } catch (PDOException $err) {
+    echo "Update data kategori gagal";
+    echo $err->getMessage();
+  }
 }
 
-function deleteCategory($kodeKat){
-	try{
-		$statement = DB->prepare("DELETE FROM categories WHERE category_id = :kodeKat");
-		$statement->bindValue(':kodeKat',$kodeKat);
-		$statement->execute();
-		header("location:manajemen_kategori.php");
-	}
-	catch(PDOException $err){
-		echo "Delete data kategori gagal";
-		echo $err->getMessage();
-	}
+function deleteCategory($kodeKat)
+{
+  try {
+    $statement = DB->prepare("DELETE FROM categories WHERE category_id = :kodeKat");
+    $statement->bindValue(':kodeKat', $kodeKat);
+    $statement->execute();
+    header("location:manajemen_kategori.php");
+  } catch (PDOException $err) {
+    echo "Delete data kategori gagal";
+    echo $err->getMessage();
+  }
 }
 
 
 ///// ======================== plant MODEL ======================== /////
-function getAllDataplant() 
+function getAllDataplant()
 {
-	try{
-		$statement = DB->prepare("SELECT * FROM plant");
-		$statement->execute();
-		return $statement->fetchAll(PDO::FETCH_ASSOC);
-	}
-	catch(PDOException $err){
-		echo $err->getMessage();
-	}
+  try {
+    $statement = DB->prepare("SELECT * FROM plant");
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $err) {
+    echo $err->getMessage();
+  }
 }
-function getAllDataplantWithDetails() 
+function getAllDataplantWithDetails()
 {
-	try{
-		$statement = DB->prepare("SELECT * FROM plants JOIN categories ON categories.category_id = plants.category_id");
-		$statement->execute();
-		return $statement->fetchAll(PDO::FETCH_ASSOC);
-	}
-	catch(PDOException $err){
-		echo $err->getMessage();
-	}
+  try {
+    $statement = DB->prepare("SELECT * FROM plants JOIN categories ON categories.category_id = plants.category_id");
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $err) {
+    echo $err->getMessage();
+  }
 }
-function getAllDataplantWithDetailsByCategory($kodeKat) 
+function getAllDataplantWithDetailsByCategory($kodeKat)
 {
-	try{
-		$statement = DB->prepare("SELECT * FROM plant JOIN categories ON categories.category_id = plant.category_id WHERE plant.category_id = :kodeKat");
-		$statement->bindValue(':kodeKat',$kodeKat);
-		$statement->execute();
-		return $statement->fetchAll(PDO::FETCH_ASSOC);
-	}
-	catch(PDOException $err){
-		echo $err->getMessage();
-	}
+  try {
+    $statement = DB->prepare("SELECT * FROM plant JOIN categories ON categories.category_id = plant.category_id WHERE plant.category_id = :kodeKat");
+    $statement->bindValue(':kodeKat', $kodeKat);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $err) {
+    echo $err->getMessage();
+  }
 }
 
-function getDataplantByCategory($category_id) 
+function getDataplantByCategory($category_id)
 {
-	try{
-		$statement = DB->prepare("SELECT * FROM plant JOIN categories ON plant.category_id=categories.category_id WHERE categories.category_id = :category_id");
-		$statement->bindValue(':category_id',$category_id);
-		$statement->execute();
-		return $statement->fetchAll(PDO::FETCH_ASSOC);
-	}
-	catch(PDOException $err){
-		echo $err->getMessage();
-	}
+  try {
+    $statement = DB->prepare("SELECT * FROM plant JOIN categories ON plant.category_id=categories.category_id WHERE categories.category_id = :category_id");
+    $statement->bindValue(':category_id', $category_id);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $err) {
+    echo $err->getMessage();
+  }
 }
 
-function getDataPlant($plant_id) 
+function getDataPlant($plant_id)
 {
-	try{
-		$statement = DB->prepare("SELECT * FROM plant where plant_id = :plant_id");
-		$statement->bindValue(':plant_id',$plant_id);
-		$statement->execute();
-		return $statement->fetchAll(PDO::FETCH_ASSOC);
-	}
-	catch(PDOException $err){
-		echo $err->getMessage();
-	}
+  try {
+    $statement = DB->prepare("SELECT * FROM plant where plant_id = :plant_id");
+    $statement->bindValue(':plant_id', $plant_id);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+  } catch (PDOException $err) {
+    echo $err->getMessage();
+  }
 }
 
 // function insertProduct($data)
@@ -380,7 +373,7 @@ function getDataPlant($plant_id)
 // 			$orderDetailInsertStm->bindValue(':jumlah_item',$jumlah_item);
 // 			$orderDetailInsertStm->execute();
 // 		}
-		
+
 // 		$kodeKeranjang = getCartCode($kodePelanggan);
 
 // 		$deleteCartDetails=DB->prepare("DELETE FROM cartdetails WHERE kodeKeranjang=:kodeKeranjang");
@@ -418,6 +411,4 @@ function getDataPlant($plant_id)
 // 		echo $err->getMessage();
 // 	}
 // }
-// ?>
-
-// ?>
+// 

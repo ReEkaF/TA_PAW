@@ -1,14 +1,37 @@
-<?php 
-    require_once("../setup.php");
-    require_once(DATABASE_PATH."/app/database.php");
+<?php
+
+require_once('../config/setup.php');
+require_once('../data/database.php');
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../app/asset/style.css">
 
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title><?= isset($title) ? $title . ' - ' : ''; ?>FloraFavs</title>
+
+  <!-- css templates -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/admin/admin.css" />
+
+  <!-- css customs -->
+
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
 </head>
-<body>
-            <?php require_once("sidebar.php"); ?>
+
+<body class="body_light">
+
+  <?php require('layouts/sidebar.php') ?>
+
+  <!-- page-wrapper -->
+  <div class="page-wrapper">
+
+    <?php require('layouts/topbar.php') ?>
+
+    <!-- content -->
+    <div class="content">
+      <div class="container container_admin content__container">
+        <div class="content__main">

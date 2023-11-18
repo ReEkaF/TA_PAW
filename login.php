@@ -1,32 +1,39 @@
 <?php
-    $title = 'Login';
-    $page = 'login';
+
+$title = 'Login';
+
+require_once('layouts/header.php');
+
 ?>
 
-<?php require_once("layouts/header.php"); ?>
+<!-- content -->
+<main class="login container">
+  <form action="./logi.php" method="get" class="login__left">
+    <h1>Login</h1>
+    <div>
+      <label for="email" class="input-label">Email</label>
+      <input type="text" name="email" id="email" class="input" />
+      <div class="input-error">Email tidak valid.</div>
+    </div>
+    <div>
+      <label for="password" class="input-label">Password</label>
+      <input type="password" name="password" id="password" class="input" />
+      <div class="input-error">Password tidak valid.</div>
+    </div>
+    <button type="submit" class="login__button" value="LOGIN">Login</button>
+    <p>Belum punya akun? <a href="./regis-master.php">Register</a></p>
+    <p>
+      <a href="./admin/login.php">Login Staff</a>
+    </p>
+  </form>
+  <div class="login__right">
+    <img src="./assets/img/plant-illustration.jpeg" alt="" />
+  </div>
+</main>
+<!-- end content -->
 
-<fieldset>
-    <legend>Login dengan akun anda</legend>
-    <form action="logi.php" method="GET">
-        <div class="field">
-            <div class="inlab">
-                <label for="email"> Email :</label>
-                <input type="text" name="email" id="email">
-            </div>
-            <span>*err msg</span>
-            <div class="inlab">
-                <label for="password"> Password :</label>
-                <input type="password" name="password" id="password">
-            </div>
-            <span>*err msg</span>
-        </div>
-        <div class="toregis">
-            <a href="regis-master.php">Belum punya akun?</a>
-        </div>
-        <div class="fieldsub">
-            <input type="submit" value="LOGIN">
-        </div>
-    </form>
-</fieldset>
-    
-<?php require_once("layouts/footer.php"); ?>
+<?php
+
+require_once('layouts/footer.php');
+
+?>
