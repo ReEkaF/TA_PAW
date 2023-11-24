@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $db = new PDO("mysql:host=localhost;dbname=store",'root','');
     $state1 = $db->prepare("SELECT customer_id,customer_email,customer_password from customers");
     $state1->execute();
