@@ -20,7 +20,7 @@ require_once('layouts/header.php');
       <input type="password" name="password" id="password" class="input" />
       <div class="input-error">Password tidak valid.</div>
     </div>
-    <button type="submit" class="login__button" value="LOGIN">Login</button>
+    <button type="submit" name='submit' class="login__button" value="LOGIN">Login</button>
     <p>Belum punya akun? <a href="./regis-master.php">Register</a></p>
     <p>
       <a href="./admin/login.php">Login Staff</a>
