@@ -1,12 +1,5 @@
-<?php
-
-require_once('../config/setup.php');
-require_once('../data/database.php');
-
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8" />
@@ -29,32 +22,38 @@ require_once('../data/database.php');
       <a href="../index.php" class="navbar__brand">
         <img src="../assets/img/logo.png" alt="FloraFavs" />
       </a>
-      <nav class="navbar__nav">
-        <a href="../index.php" class="navbar__link">Products</a>
-        <a href="../transactions.php" class="navbar__link">Transactions</a>
-        <a href="../cart.php" class="navbar__link">Cart(<span>0</span>)</a>
-      </nav>
+      <?php if (isset($_SESSION['customer_id'])) : ?>
+        <nav class="navbar__nav">
+          <a href="../products.php" class="navbar__link">Produk</a>
+          <a href="../transactions.php" class="navbar__link">Transaksi</a>
+          <a href="../cart.php" class="navbar__link">Keranjang</a>
+        </nav>
+      <?php endif; ?>
       <div class="navbar__right">
-        <a href="../login.php" class="navbar__cta">Login</a>
-        <a href="../register.php" class="navbar__cta">Register</a>
-        <div class="navbar__profile">
-          <a href="javascript:void(0)" class="navbar__profile-toggler">
-            <img src="../assets/img/profiles/profile-2.png" alt="" class="navbar__profile-img" />
-          </a>
-          <div class="navbar__profile-menu-list">
-            <a href="../profile.php" class="navbar__profile-menu-link">
-              <i class="ph ph-user"></i>
-              View profile</a>
-            <a href="../change-password.php" class="navbar__profile-menu-link">
-              <i class="ph ph-lock-simple"></i>
-              Change password</a>
-            <hr class="navbar__profile-menu-divider" />
-            <a href="../login.php" class="navbar__profile-menu-link">
-              <i class="ph ph-arrow-right"></i>
-
-              Logout</a>
+        <?php if (!isset($_SESSION['customer_id'])) : ?>
+          <a href="../login.php" class="navbar__cta">Masuk</a>
+          <a href="../register.php" class="navbar__cta">Daftar</a>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['customer_id'])) : ?>
+          <div class="navbar__profile">
+            <a href="javascript:void(0)" class="navbar__profile-toggler">
+              <img src="<?= $_SESSION['customer_photo'] == null ? '../assets/img/default-profile.jpg' : '../assets/img/profiles/' . $_SESSION['customer_photo'] ?>" alt="" class="navbar__profile-img" />
+            </a>
+            <div class="navbar__profile-menu-list">
+              <a href="../profile.php" class="navbar__profile-menu-link">
+                <i class="ph ph-user"></i>
+                Lihat profil</a>
+              <a href="../change-password.php" class="navbar__profile-menu-link">
+                <i class="ph ph-lock-simple"></i>
+                Ubah password</a>
+              <hr class="navbar__profile-menu-divider" />
+              <a href="../logout.php" class="navbar__profile-menu-link">
+                <i class="ph ph-arrow-right"></i>
+                Keluar
+              </a>
+            </div>
           </div>
-        </div>
+        <?php endif; ?>
       </div>
     </div>
   </div>

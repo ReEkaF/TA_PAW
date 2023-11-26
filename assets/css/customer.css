@@ -1,3 +1,8 @@
+/* 
+  =================================
+  styling untuk komponen navbar
+  =================================
+ */
 .navbar {
   position: sticky;
   top: 0;
@@ -61,6 +66,9 @@
 .navbar__profile-img {
   display: block;
   width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 9999rem;
 }
 .navbar__profile-menu-list {
   position: absolute;
@@ -99,6 +107,11 @@
   border-top: 1px solid #e9e9e9;
 }
 
+/* 
+  =================================
+  styling untuk komponen footer
+  =================================
+ */
 .footer {
   margin-top: 84px;
   padding-top: 80px;
@@ -158,6 +171,36 @@
   text-decoration: none;
 }
 
+/* 
+  =================================
+  styling untuk komponen alert
+  =================================
+ */
+.alert {
+  position: relative;
+  padding: 20px 24px;
+  font-size: 18px;
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 12px;
+}
+.alert_success {
+  color: #204e51;
+  background-color: rgba(32, 78, 81, 0.0666666667);
+  border: 1px solid #204e51;
+}
+.alert_danger {
+  color: #931c32;
+  background-color: rgba(147, 28, 50, 0.0666666667);
+  border: 1px solid #931c32;
+}
+
+/* 
+  =================================
+  styling untuk komponen badge
+  =================================
+ */
 .badge {
   display: inline-block;
   padding: 0.35em 0.65em;
@@ -183,283 +226,11 @@
   background-color: #b58700;
 }
 
-.cart {
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
-  padding-block: 84px;
-}
-.cart__body {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-.cart__list {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding: 48px;
-  border-radius: 24px;
-  box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
-}
-.cart__list hr {
-  margin: 0;
-  border: none;
-  border-top: 1px solid #e9e9e9;
-}
-.cart__item {
-  display: flex;
-  justify-content: space-between;
-}
-.cart__item-left {
-  display: flex;
-  flex-direction: row;
-  gap: 18px;
-}
-.cart__item-left img {
-  display: block;
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-}
-.cart__item-left-text {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.cart__item-left h2 {
-  font-size: 22px;
-  font-weight: 700;
-}
-.cart__item-left p {
-  color: #204e51;
-  font-size: 18px;
-}
-.cart__item-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-.cart__item-right a {
-  color: #8d8d91;
-  text-decoration: none;
-}
-.cart__item-right a i {
-  display: block;
-  font-size: 24px;
-}
-.cart__item-right p {
-  font-size: 18px;
-}
-.cart__item:last-of-type {
-  align-items: center;
-}
-.cart__actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.cart__action-button {
-  display: block;
-  padding: 5px 10px;
-  background-color: #ffffff;
-  color: #204e51;
-  font-family: "Nunito", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  border: 1px solid #204e51;
-  border-radius: 8px;
-  text-decoration: none;
-}
-.cart__button {
-  display: block;
-  padding: 20px 40px;
-  background-color: #204e51;
-  color: #ffffff;
-  font-family: "Nunito", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-}
-
-.checkout__header {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  max-width: 713px;
-  margin-inline: auto;
-  padding-block: 84px 140px;
-  text-align: center;
-}
-.checkout__header h1 {
-  font-size: 48px;
-  font-weight: 700;
-}
-.checkout__header p {
-  color: #8d8d91;
-  font-size: 18px;
-  line-height: 30px;
-}
-.checkout__body {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  width: 908px;
-  margin-inline: auto;
-  padding-bottom: 84px;
-}
-.checkout__list {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding: 48px;
-  border-radius: 24px;
-  box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
-}
-.checkout__list hr {
-  margin: 0;
-  border: none;
-  border-top: 1px solid #e9e9e9;
-}
-.checkout__item {
-  display: flex;
-  justify-content: space-between;
-}
-.checkout__item-left {
-  display: flex;
-  flex-direction: row;
-  gap: 18px;
-}
-.checkout__item-left img {
-  display: block;
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-}
-.checkout__item-left-text {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.checkout__item-left h2 {
-  font-size: 22px;
-  font-weight: 700;
-}
-.checkout__item-left p {
-  color: #204e51;
-  font-size: 18px;
-}
-.checkout__item-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-.checkout__item-right a {
-  color: #8d8d91;
-  text-decoration: none;
-}
-.checkout__item-right a i {
-  display: block;
-  font-size: 24px;
-}
-.checkout__item-right p {
-  font-size: 18px;
-}
-.checkout__item:last-of-type {
-  align-items: center;
-}
-.checkout__actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.checkout__action-button {
-  display: block;
-  padding: 5px 10px;
-  background-color: #ffffff;
-  color: #204e51;
-  font-family: "Nunito", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  border: 1px solid #204e51;
-  border-radius: 8px;
-  text-decoration: none;
-}
-.checkout__method {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  padding: 48px;
-  border-radius: 24px;
-  box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
-}
-.checkout__method-group {
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-}
-.checkout__method-title {
-  font-size: 22px;
-  font-weight: 700;
-}
-.checkout__method-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-}
-.checkout__method-list label {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 103px;
-  height: 62px;
-  border: 1px solid #e9e9e9;
-  border-radius: 12px;
-}
-.checkout__method-list label input {
-  display: none;
-}
-.checkout__method-list label img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: 71px;
-  max-height: 30px;
-}
-.checkout__method-list label i {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  display: none;
-  font-size: 16px;
-  color: #199623;
-}
-.checkout__method-list label.active {
-  border: 1px solid #199623;
-}
-.checkout__method-list label.active i {
-  display: block;
-}
-.checkout__button {
-  display: block;
-  padding: 20px 40px;
-  background-color: #204e51;
-  color: #ffffff;
-  font-family: "Nunito", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-}
-
+/* 
+  =================================
+  styling untuk komponen filter
+  =================================
+ */
 .filter {
   display: flex;
   align-items: flex-start;
@@ -549,6 +320,128 @@
   box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
 }
 
+/* 
+  =================================
+  styling untuk komponen hero
+  =================================
+ */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 84px;
+}
+.hero__left {
+  max-width: 537px;
+}
+.hero__title {
+  margin-bottom: 14px;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 60px;
+}
+.hero__subtitle {
+  margin-bottom: 40px;
+  color: #8d8d91;
+  font-size: 18px;
+  line-height: 30px;
+}
+.hero__button {
+  display: inline-block;
+  background-color: #204e51;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 20px 40px;
+}
+.hero__right {
+  display: flex;
+  gap: 26px;
+}
+.hero__img-group {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.hero__img-group img {
+  display: block;
+  width: 309px;
+}
+.hero__img-group:first-of-type {
+  padding-top: 65px;
+}
+
+/* 
+  =================================
+  styling untuk komponen how
+  =================================
+ */
+.how {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding-block: 84px;
+}
+.how__header {
+  margin-inline: auto;
+  max-width: 316px;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+}
+.how__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+}
+.how__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+.how__item {
+  width: 334px;
+}
+.how__img {
+  display: block;
+  width: 228px;
+  height: 228px;
+  margin: 40px auto;
+  object-fit: cover;
+  border-radius: 9999rem;
+}
+.how__title {
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+.how__description {
+  color: #8d8d91;
+  font-size: 18px;
+  text-align: center;
+  line-height: 30px;
+}
+.how__button {
+  display: block;
+  background-color: #204e51;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 20px 40px;
+}
+
+/* 
+  =================================
+  styling untuk komponen input
+  =================================
+ */
 .input {
   padding: 20px 24px;
   font-family: "Nunito", sans-serif;
@@ -574,55 +467,60 @@
   color: #931c32;
 }
 
-.login {
-  display: flex;
-  justify-content: space-between;
-  padding: 148px 24px 84px;
+/* 
+  =================================
+  styling untuk komponen join
+  =================================
+ */
+.join {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+  padding-block: 84px;
 }
-.login__left {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  width: 504px;
+.join__card {
+  padding: 88px 65px 92px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 24px;
+  box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
 }
-.login__left > h1 {
-  margin-bottom: 14px;
-  font-size: 48px;
-  font-weight: 700;
-}
-.login__right {
-  position: relative;
-  width: 100%;
-  max-width: 632px;
-}
-.login__right img {
-  position: absolute;
-  top: -5%;
-  left: -15%;
-  display: block;
-  width: 900px;
-  z-index: -1;
-}
-.login p {
-  font-size: 18px;
-  color: #8d8d91;
-}
-.login p a {
-  color: #204e51;
-  text-decoration: none;
-}
-.login__button {
-  display: block;
-  padding: 20px 40px;
+.join__card_admin {
   background-color: #204e51;
   color: #ffffff;
-  font-family: "Nunito", sans-serif;
+}
+.join__title {
+  margin-bottom: 14px;
+  color: inherit;
+  font-size: 32px;
+  font-weight: 700;
+}
+.join__description {
+  margin-bottom: 34px;
+  color: #8d8d91;
+  font-size: 18px;
+  line-height: 30px;
+}
+.join__button {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #000000;
   font-size: 18px;
   font-weight: 600;
-  border: none;
+  text-decoration: none;
   border-radius: 12px;
+  padding: 20px 40px;
+}
+.join__button_primary {
+  background-color: #204e51;
+  color: #ffffff;
 }
 
+/* 
+  =================================
+  styling untuk komponen products
+  =================================
+ */
 .products {
   display: flex;
   flex-direction: column;
@@ -709,361 +607,58 @@
   display: block;
   font-size: 20px;
 }
-
-.profile__header {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  max-width: 713px;
-  margin-inline: auto;
-  padding-block: 84px;
+.products__empty {
+  grid-column: 1/4;
   text-align: center;
-}
-.profile__header h1 {
-  font-size: 48px;
-  font-weight: 700;
-}
-.profile__body {
-  display: flex;
-  justify-content: space-around;
-  padding-bottom: 84px;
-}
-.profile__left {
-  max-width: 432px;
-}
-.profile__left img {
-  width: 300px;
-}
-.profile__right {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  width: 704px;
-}
-.profile__form {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
-  border-radius: 24px;
-  padding: 80px 52px;
-}
-.profile__button {
-  display: block;
-  margin-left: auto;
-  padding: 20px 40px;
-  background-color: #204e51;
-  color: #ffffff;
-  font-family: "Nunito", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-}
-
-.register {
-  display: flex;
-  justify-content: center;
-  padding: 84px 24px;
-}
-.register__form {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  width: 604px;
-}
-.register__form > h1 {
-  margin-bottom: 14px;
-  font-size: 48px;
-  font-weight: 700;
-  text-align: center;
-}
-.register p {
-  font-size: 18px;
-  color: #8d8d91;
-  text-align: center;
-}
-.register p a {
-  color: #204e51;
-  text-decoration: none;
-}
-.register__button {
-  display: block;
-  padding: 20px 40px;
-  background-color: #204e51;
-  color: #ffffff;
-  font-family: "Nunito", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-}
-
-.transaction-edit-method__header {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  max-width: 713px;
-  margin-inline: auto;
-  padding-block: 84px;
-  text-align: center;
-}
-.transaction-edit-method__header p {
-  color: #8d8d91;
-  font-size: 18px;
-  line-height: 30px;
-}
-.transaction-edit-method__header p a {
-  color: #204e51;
-  text-decoration: none;
-}
-.transaction-edit-method__header h1 {
-  font-size: 48px;
-  font-weight: 700;
-}
-.transaction-edit-method__body {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  width: 908px;
-  margin-inline: auto;
-  padding-bottom: 84px;
-}
-.transaction-edit-method__method {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  padding: 48px;
-  border-radius: 24px;
-  box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
-}
-.transaction-edit-method__method-group {
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-}
-.transaction-edit-method__method-title {
   font-size: 22px;
   font-weight: 700;
 }
-.transaction-edit-method__method-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-}
-.transaction-edit-method__method-list label {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 103px;
-  height: 62px;
-  border: 1px solid #e9e9e9;
-  border-radius: 12px;
-}
-.transaction-edit-method__method-list label input {
-  display: none;
-}
-.transaction-edit-method__method-list label img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: 71px;
-  max-height: 30px;
-}
-.transaction-edit-method__method-list label i {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  display: none;
-  font-size: 16px;
-  color: #199623;
-}
-.transaction-edit-method__method-list label.active {
-  border: 1px solid #199623;
-}
-.transaction-edit-method__method-list label.active i {
-  display: block;
-}
-.transaction-edit-method__button {
-  display: block;
-  padding: 20px 40px;
-  background-color: #204e51;
-  color: #ffffff;
-  font-family: "Nunito", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-}
 
-.transaction-single__header {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  max-width: 713px;
-  margin-inline: auto;
+/* 
+  =================================
+  styling untuk komponen promotion
+  =================================
+ */
+.promotion {
   padding-block: 84px;
-  text-align: center;
+  background-color: #f9f9f9;
 }
-.transaction-single__header h1 {
-  font-size: 48px;
+.promotion__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.promotion__right {
+  max-width: 533px;
+}
+.promotion__title {
+  margin-bottom: 26px;
+  font-size: 32px;
   font-weight: 700;
 }
-.transaction-single__header p {
+.promotion__description {
+  margin-bottom: 40px;
   color: #8d8d91;
   font-size: 18px;
   line-height: 30px;
 }
-.transaction-single__body {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  width: 908px;
-  margin-inline: auto;
-  padding-bottom: 84px;
-}
-.transaction-single__list {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding: 48px;
-  border-radius: 24px;
-  box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
-}
-.transaction-single__list hr {
-  margin: 0;
-  border: none;
-  border-top: 1px solid #e9e9e9;
-}
-.transaction-single__item {
-  display: flex;
-  justify-content: space-between;
-}
-.transaction-single__item-left {
-  display: flex;
-  flex-direction: row;
-  gap: 18px;
-}
-.transaction-single__item-left img {
+.promotion__img {
   display: block;
-  width: 70px;
-  height: 70px;
+  width: 450px;
+  height: 502px;
   object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-}
-.transaction-single__item-left-text {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.transaction-single__item-left h2 {
-  font-size: 22px;
-  font-weight: 700;
-}
-.transaction-single__item-left p {
-  color: #204e51;
-  font-size: 18px;
-}
-.transaction-single__item-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-.transaction-single__item-right p {
-  font-size: 18px;
-}
-.transaction-single__item:last-of-type {
-  align-items: center;
-}
-.transaction-single a {
-  color: #204e51;
-  width: auto;
-}
-.transaction-single__method {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  padding: 48px;
-  border-radius: 24px;
-  box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
-}
-.transaction-single__method-group {
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-}
-.transaction-single__method-title {
-  font-size: 22px;
-  font-weight: 700;
-}
-.transaction-single__method-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-}
-.transaction-single__method-item {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 103px;
-  height: 62px;
-  border: 1px solid #e9e9e9;
   border-radius: 12px;
 }
-.transaction-single__method-item img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: 71px;
-  max-height: 30px;
-}
-.transaction-single__method p {
-  color: #8d8d91;
-  font-size: 18px;
-}
-.transaction-single__method ol {
-  list-style-type: decimal;
-  color: #8d8d91;
-  font-size: 18px;
-}
-.transaction-single__method ol li {
-  margin-left: 20px;
-  padding-left: 10px;
+.promotion__img:last-of-type {
+  margin-top: -251px;
+  margin-left: 225px;
 }
 
-.transactions {
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
-  padding-block: 84px;
-}
-.transactions__body {
-  padding: 48px;
-  border-radius: 24px;
-  box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
-}
-.transactions__table {
-  width: 100%;
-  font-size: 18px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-.transactions__table > :not(caption) > * > * {
-  padding: 16px 16px;
-}
-.transactions__table th {
-  text-align: inherit;
-  font-weight: 700;
-  background-color: rgba(32, 78, 81, 0.0666666667);
-}
-.transactions__table a {
-  color: #204e51;
-}
-
+/* 
+  =================================
+  styling untuk komponen section header
+  =================================
+ */
 .section-header {
   display: flex;
   align-items: center;

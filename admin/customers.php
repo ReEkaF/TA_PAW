@@ -1,16 +1,26 @@
 <?php
 
-$page = 'customers';
-$title = 'Customers';
+session_start();
 
-require_once('layouts/header.php');
+if (!isset($_SESSION['staff_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+require_once('../data/customer.php');
+
+$customers = get_customers();
+
+$page = 'customers';
+$title = 'Pelanggan';
+require('layouts/header.php');
 
 ?>
 
 <!-- your content in here -->
 <div class="admin">
   <div class="admin__header">
-    <h1 class="admin__title">Customers</h1>
+    <h1 class="admin__title">Pelanggan</h1>
   </div>
   <div class="admin__body">
     <div class="admin__card">
@@ -18,44 +28,22 @@ require_once('layouts/header.php');
         <thead>
           <tr>
             <th>No.</th>
-            <th>Name</th>
-            <th>Phone</th>
+            <th>Nama</th>
+            <th>Telepon</th>
             <th>Email</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./customer-single.php">Bunga Mawar</a>
-            </td>
-            <td>08123456789</td>
-            <td>shafy@example.com</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./customer-single.php">Bunga Mawar</a>
-            </td>
-            <td>08123456789</td>
-            <td>shafy@example.com</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./customer-single.php">Bunga Mawar</a>
-            </td>
-            <td>08123456789</td>
-            <td>shafy@example.com</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./customer-single.php">Bunga Mawar</a>
-            </td>
-            <td>08123456789</td>
-            <td>shafy@example.com</td>
-          </tr>
+          <?php foreach ($customers as $i => $customer) : ?>
+            <tr>
+              <td><?= $i + 1 ?>.</td>
+              <td>
+                <a href="./customer-single.php?customer_email=<?= $customer['customer_email'] ?>"><?= $customer['customer_name'] ?></a>
+              </td>
+              <td><?= $customer['customer_phone'] ?></td>
+              <td><?= $customer['customer_email'] ?></td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
@@ -65,6 +53,6 @@ require_once('layouts/header.php');
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>

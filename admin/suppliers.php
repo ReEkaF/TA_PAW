@@ -1,18 +1,28 @@
 <?php
 
-$page = 'suppliers';
-$title = 'Suppliers';
+session_start();
 
-require_once('layouts/header.php');
+if (!isset($_SESSION['staff_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+require_once('../data/supplier.php');
+
+$suppliers = get_suppliers();
+
+$page = 'suppliers';
+$title = 'Pemasok';
+require('layouts/header.php');
 
 ?>
 
 <!-- your content in here -->
 <div class="admin">
   <div class="admin__header">
-    <h1 class="admin__title">Suppliers</h1>
+    <h1 class="admin__title">Pemasok</h1>
     <div class="admin__actions">
-      <a href="./supplier-add.php" class="admin__button">Add Supplier</a>
+      <a href="./supplier-add.php" class="admin__button">Tambah Pemasok</a>
     </div>
   </div>
   <div class="admin__body">
@@ -21,39 +31,20 @@ require_once('layouts/header.php');
         <thead>
           <tr>
             <th>No.</th>
-            <th>Name</th>
-            <th>Phone</th>
+            <th>Nama</th>
+            <th>Telepon</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./supplier-single.php">Bunga Mawar</a>
-            </td>
-            <td>Rp23,000</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./supplier-single.php">Bunga Mawar</a>
-            </td>
-            <td>Rp23,000</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./supplier-single.php">Bunga Mawar</a>
-            </td>
-            <td>Rp23,000</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./supplier-single.php">Bunga Mawar</a>
-            </td>
-            <td>Rp23,000</td>
-          </tr>
+          <?php foreach ($suppliers as $i => $supplier) : ?>
+            <tr>
+              <td><?= $i + 1 ?>.</td>
+              <td>
+                <a href="./supplier-single.php?supplier_id=<?= $supplier['supplier_id'] ?>"><?= $supplier['supplier_name'] ?></a>
+              </td>
+              <td><?= $supplier['supplier_phone'] ?></td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
@@ -63,6 +54,6 @@ require_once('layouts/header.php');
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>

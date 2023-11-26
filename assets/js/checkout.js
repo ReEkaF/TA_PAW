@@ -1,4 +1,6 @@
-const transactionEditPaymentMethod = () => {
+// fungsi untuk halaman checkout, yang melakukan hal berikut:
+// 1. toggle class ketika elemen item pada daftar metode pembayaran diklik, untuk menampilkan/menyembunyikan state aktif (berupa warna).
+const checkout = () => {
   const methodList = document.querySelectorAll(".checkout__method-list label");
 
   methodList.forEach((methodItem) => {
@@ -12,4 +14,4 @@ const transactionEditPaymentMethod = () => {
   });
 };
 
-transactionEditPaymentMethod();
+checkout();

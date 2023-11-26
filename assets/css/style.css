@@ -1,9 +1,19 @@
+/* 
+  =================================
+  memanggil file css lain untuk icon
+  =================================
+ */
 @import url("../../vendor/web-2.0.2/src/bold/style.css");
 @import url("../../vendor/web-2.0.2/src/duotone/style.css");
 @import url("../../vendor/web-2.0.2/src/fill/style.css");
 @import url("../../vendor/web-2.0.2/src/light/style.css");
 @import url("../../vendor/web-2.0.2/src/regular/style.css");
 @import url("../../vendor/web-2.0.2/src/thin/style.css");
+/* 
+  =================================
+  style font face
+  =================================
+ */
 @font-face {
   font-display: swap;
   font-family: "Nunito";
@@ -25,6 +35,11 @@
   font-weight: 700;
   src: url("../fonts/nunito-v26-latin-700.woff2") format("woff2"), url("../fonts/nunito-v26-latin-700.ttf") format("truetype");
 }
+/* 
+  =================================
+  styling dasar untuk elemen-elemen
+  =================================
+ */
 html,
 body,
 div,
@@ -177,6 +192,11 @@ body {
   box-sizing: border-box;
 }
 
+/* 
+  =================================
+  styling untuk komponen container
+  =================================
+ */
 .container {
   margin-inline: auto;
   max-width: 1318px;
@@ -185,4 +205,13 @@ body {
 }
 .container_admin {
   max-width: 1092px;
+}
+
+/* 
+  =================================
+  styling untuk teks
+  =================================
+ */
+.text-danger {
+  color: #931c32;
 }
