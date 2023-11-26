@@ -6,8 +6,7 @@
         <img src="../assets/img/logo.png" alt="FloraFavs" />
       </a>
       <p class="footer__description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna sed
-        tortor nullam vel velit quis enim et amet.
+        Website yang menjual berbagai macam tanaman dengan harga yang terjangkau dan kemudahan bagi pengguna.
       </p>
       <div class="footer__socmed-list">
         <a href="#" class="footer__socmed-link"><img src="../assets/img/socmeds/facebook.png" alt="FloraFavs Facebook" class="footer__socmed-img" /></a>

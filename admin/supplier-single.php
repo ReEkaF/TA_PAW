@@ -1,11 +1,58 @@
 <?php
 
-$page = 'suppliers';
-$title = 'Supplier Single';
+session_start();
 
-require_once('layouts/header.php');
+if (!isset($_SESSION['staff_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+if (!isset($_GET['supplier_id'])) {
+  header("Location: ./suppliers.php");
+  exit();
+}
+
+require_once('../data/supplier.php');
+require_once('../libs/validation.php');
+
+$supplier = find_supplier($_GET['supplier_id']);
+
+if (!$supplier) {
+  header("Location: ./suppliers.php");
+  exit();
+}
+
+$errors = [];
+$old_inputs = [
+  'name' => $supplier['supplier_name'],
+  'phone' => $supplier['supplier_phone'],
+  'address' => $supplier['supplier_address'],
+];
+
+if (isset($_POST['submit'])) {
+  validate_name($errors, $_POST, 'name');
+  validate_phone($errors, $_POST, 'phone');
+  validate_address($errors, $_POST, 'address');
+
+  if (!$errors) {
+    update_supplier($supplier['supplier_id'], $_POST);
+    header('Location: ./suppliers.php');
+    exit();
+  }
+
+  $old_inputs['name'] = $_POST['name'];
+  $old_inputs['phone'] = $_POST['phone'];
+  $old_inputs['address'] = $_POST['address'];
+}
+
+$page = 'suppliers';
+$title = 'Detail Pemasok';
+require('layouts/header.php');
 
 ?>
+
+<!-- css customs -->
+<link rel="stylesheet" href="../assets/css/admin/page-single.css">
 
 <!-- your content in here -->
 <div class="admin">
@@ -14,35 +61,43 @@ require_once('layouts/header.php');
       <i class="ph-bold ph-arrow-left"></i>
       <a href="./suppliers.php">Kembali</a>
     </div>
-    <h1 class="admin__title">Supplier single</h1>
+    <h1 class="admin__title">Detail pemasok</h1>
   </div>
   <div class="admin__body">
     <div class="admin__card">
-      <form action="./supplier-single.php" method="post" class="page-single">
+      <form action="./supplier-single.php?supplier_id=<?= $supplier['supplier_id'] ?>" method="post" class="page-single">
         <div>
-          <label for="email" class="input-label">Name</label>
-          <input type="text" id="email" class="input" />
-          <div class="input-help">
-            Password harus berupa angka, alfabet, dan 1 karakter
-            khusus.
-          </div>
-          <div class="input-error">
-            Harus terdapat 1 karakter khusus.
-          </div>
+          <label for="name" class="input-label">Nama <span class="text-danger">*</span></label>
+          <input type="text" id="name" name="name" class="input" value="<?= $old_inputs['name'] ?>" />
+          <?php if (isset($errors['name'])) : ?>
+            <div class="input-error">
+              <?= $errors['name'] ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div>
-          <label for="email" class="input-label">Phone</label>
-          <input type="text" id="email" class="input" />
+          <label for="phone" class="input-label">Telepon <span class="text-danger">*</span></label>
+          <input type="text" id="phone" name="phone" class="input" value="<?= $old_inputs['phone'] ?>" />
+          <?php if (isset($errors['phone'])) : ?>
+            <div class="input-error">
+              <?= $errors['phone'] ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div>
-          <label for="email" class="input-label">Address</label>
-          <input type="text" id="email" class="input" />
+          <label for="address" class="input-label">Alamat <span class="text-danger">*</span></label>
+          <input type="text" id="address" name="address" class="input" value="<?= $old_inputs['address'] ?>" />
+          <?php if (isset($errors['address'])) : ?>
+            <div class="input-error">
+              <?= $errors['address'] ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div class="page-single__actions-container">
-          <a href="./suppliers.php" class="page-single__button" onclick="return confirm('Are you sure want to delete?')">Delete</a>
+          <a href="./supplier-delete.php?supplier_id=<?= $supplier['supplier_id'] ?>" class="page-single__button">Hapus</a>
           <div class="page-single__actions">
-            <a href="./suppliers.php" class="page-single__button">Cancel</a>
-            <button type="submit" class="page-single__button page-single__button_primary">
+            <a href="./suppliers.php" class="page-single__button">Batal</a>
+            <button type="submit" name="submit" class="page-single__button page-single__button_primary">
               Simpan
             </button>
           </div>
@@ -55,6 +110,6 @@ require_once('layouts/header.php');
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>

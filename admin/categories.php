@@ -1,18 +1,29 @@
 <?php
 
-$page = 'categories';
-$title = 'Categories';
+session_start();
 
-require_once('layouts/header.php');
+if (!isset($_SESSION['staff_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+require_once('../data/category.php');
+require_once('../data/plant.php');
+
+$categories = get_categories();
+
+$page = 'categories';
+$title = 'Kategori';
+require('layouts/header.php');
 
 ?>
 
 <!-- your content in here -->
 <div class="admin">
   <div class="admin__header">
-    <h1 class="admin__title">Categories</h1>
+    <h1 class="admin__title">Kategori</h1>
     <div class="admin__actions">
-      <a href="./category-add.php" class="admin__button">Add Category</a>
+      <a href="./category-add.php" class="admin__button">Tambah Kategori</a>
     </div>
   </div>
   <div class="admin__body">
@@ -21,39 +32,20 @@ require_once('layouts/header.php');
         <thead>
           <tr>
             <th>No.</th>
-            <th>Name</th>
-            <th>Related Products</th>
+            <th>Nama</th>
+            <th>Produk Terkait</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./category-single.php">Category 1</a>
-            </td>
-            <td>23</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./category-single.php">Category 1</a>
-            </td>
-            <td>23</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./category-single.php">Category 1</a>
-            </td>
-            <td>23</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>
-              <a href="./category-single.php">Category 1</a>
-            </td>
-            <td>23</td>
-          </tr>
+          <?php foreach ($categories as $i => $category) : ?>
+            <tr>
+              <td><?= $i + 1 ?>.</td>
+              <td>
+                <a href="./category-single.php?category_id=<?= $category['category_id'] ?>"><?= $category['category_name'] ?></a>
+              </td>
+              <td><?= count_related_plants_based_on_category($category['category_id'])['count_related_plants'] ?></td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
@@ -63,6 +55,6 @@ require_once('layouts/header.php');
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>

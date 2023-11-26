@@ -1,11 +1,78 @@
 <?php
 
-$page = 'products';
-$title = 'Product Single';
+session_start();
 
-require_once('layouts/header.php');
+if (!isset($_SESSION['staff_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+if (!isset($_GET['plant_id'])) {
+  header("Location: ./products.php");
+  exit();
+}
+
+require_once('../data/category.php');
+require_once('../data/plant.php');
+require_once('../data/supplier.php');
+require_once('../libs/validation.php');
+require_once('../libs/file.php');
+
+$plant = find_plant($_GET['plant_id']);
+$categories = get_categories();
+$suppliers = get_suppliers();
+
+if (!$plant) {
+  header("Location: ./products.php");
+  exit();
+}
+
+$errors = [];
+$old_inputs = [
+  'supplier_id' => $plant['supplier_id'],
+  'category_id' => $plant['category_id'],
+  'name' => $plant['plant_name'],
+  'price' => $plant['plant_price'],
+  'stock' => $plant['plant_stock'],
+];
+
+if (isset($_POST['submit'])) {
+  validate_num($errors, $_POST, 'supplier_id');
+  validate_num($errors, $_POST, 'category_id');
+  validate_name($errors, $_POST, 'name');
+  validate_num($errors, $_POST, 'price');
+  validate_num($errors, $_POST, 'stock');
+
+  if (!$errors) {
+    $filename = upload_file($_FILES, 'photo', 'plants');
+
+    if ($filename) {
+      $_POST['photo'] = $filename;
+      delete_file($plant['plant_photo'], 'plants');
+    } else {
+      $_POST['photo'] = $plant['plant_photo'];
+    }
+
+    update_plant($plant['plant_id'], $_POST);
+    header('Location: ./products.php');
+    exit();
+  }
+
+  $old_inputs['supplier_id'] = $_POST['supplier_id'];
+  $old_inputs['category_id'] = $_POST['category_id'];
+  $old_inputs['name'] = $_POST['name'];
+  $old_inputs['price'] = $_POST['price'];
+  $old_inputs['stock'] = $_POST['stock'];
+}
+
+$page = 'products';
+$title = 'Detail Tanaman';
+require('layouts/header.php');
 
 ?>
+
+<!-- css customs -->
+<link rel="stylesheet" href="../assets/css/admin/page-single.css">
 
 <!-- your content in here -->
 <div class="admin">
@@ -14,62 +81,79 @@ require_once('layouts/header.php');
       <i class="ph-bold ph-arrow-left"></i>
       <a href="./products.php">Kembali</a>
     </div>
-    <h1 class="admin__title">Product single</h1>
+    <h1 class="admin__title">Detail tanaman</h1>
   </div>
   <div class="admin__body">
     <div class="admin__card">
-      <form action="./product-single.php" method="post" class="page-single">
-        <img src="../assets/img/plants/plant-1.png" alt="" class="page-single__img" />
+      <form action="./product-single.php?plant_id=<?= $plant['plant_id'] ?>" method="post" class="page-single" enctype="multipart/form-data">
+        <img src="../assets/img/plants/<?= $plant['plant_photo'] ?>" alt="<?= $plant['plant_name'] ?>" class="page-single__img" />
         <div>
-          <label for="email" class="input-label">Name</label>
-          <input type="text" id="email" class="input" />
-          <div class="input-help">
-            Password harus berupa angka, alfabet, dan 1 karakter
-            khusus.
-          </div>
-          <div class="input-error">
-            Harus terdapat 1 karakter khusus.
-          </div>
+          <label for="name" class="input-label">Nama <span class="text-danger">*</span></label>
+          <input type="text" id="name" name="name" class="input" value="<?= $old_inputs['name'] ?>" />
+          <?php if (isset($errors['name'])) : ?>
+            <div class="input-error">
+              <?= $errors['name'] ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div>
-          <label for="email" class="input-label">Price</label>
-          <input type="text" id="email" class="input" />
+          <label for="price" class="input-label">Harga <span class="text-danger">*</span></label>
+          <input type="text" id="price" name="price" class="input" value="<?= $old_inputs['price'] ?>" />
+          <?php if (isset($errors['price'])) : ?>
+            <div class="input-error">
+              <?= $errors['price'] ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div>
-          <label for="email" class="input-label">Category</label>
-          <select name="category" id="category" class="input-select">
-            <option value="" selected disabled>
-              Select category
-            </option>
-            <option value="category-1">Category 1</option>
-            <option value="category-2">Category 2</option>
-            <option value="category-3">Category 3</option>
+          <label for="category_id" class="input-label">Kategori <span class="text-danger">*</span></label>
+          <select name="category_id" id="category_id" class="input-select">
+            <?php foreach ($categories as $category) : ?>
+              <option value="<?= $category['category_id'] ?>" <?= $category['category_id'] == $old_inputs['category_id'] ? 'selected' : '' ?>><?= $category['category_name'] ?></option>
+            <?php endforeach; ?>
           </select>
+          <?php if (isset($errors['category_id'])) : ?>
+            <div class="input-error">
+              <?= $errors['category_id'] ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div>
-          <label for="email" class="input-label">Supplier</label>
-          <select name="category" id="category" class="input-select">
-            <option value="" selected disabled>
-              Select supplier
-            </option>
-            <option value="supplier-1">Supplier 1</option>
-            <option value="supplier-2">Supplier 2</option>
-            <option value="supplier-3">Supplier 3</option>
+          <label for="supplier_id" class="input-label">Pemasok <span class="text-danger">*</span></label>
+          <select name="supplier_id" id="supplier_id" class="input-select">
+            <?php foreach ($suppliers as $supplier) : ?>
+              <option value="<?= $supplier['supplier_id'] ?>" <?= $supplier['supplier_id'] == $old_inputs['supplier_id'] ? 'selected' : '' ?>><?= $supplier['supplier_name'] ?></option>
+            <?php endforeach; ?>
           </select>
+          <?php if (isset($errors['supplier_id'])) : ?>
+            <div class="input-error">
+              <?= $errors['supplier_id'] ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div>
-          <label for="email" class="input-label">Stock</label>
-          <input type="text" id="email" class="input" />
+          <label for="stock" class="input-label">Stok <span class="text-danger">*</span></label>
+          <input type="text" id="stock" name="stock" class="input" value="<?= $old_inputs['stock'] ?>" />
+          <?php if (isset($errors['stock'])) : ?>
+            <div class="input-error">
+              <?= $errors['stock'] ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div>
-          <label for="email" class="input-label">Photo</label>
-          <input type="file" id="email" class="input" />
+          <label for="photo" class="input-label">Foto</label>
+          <input type="file" id="photo" name="photo" class="input" />
+          <?php if (isset($errors['photo'])) : ?>
+            <div class="input-error">
+              <?= $errors['photo'] ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div class="page-single__actions-container">
-          <a href="./products.php" class="page-single__button" onclick="return confirm('Are you sure want to delete?')">Delete</a>
+          <a href="./product-delete.php?plant_id=<?= $plant['plant_id'] ?>" class="page-single__button">Hapus</a>
           <div class="page-single__actions">
-            <a href="./products.php" class="page-single__button">Cancel</a>
-            <button type="submit" class="page-single__button page-single__button_primary">
+            <a href="./products.php" class="page-single__button">Batal</a>
+            <button type="submit" name="submit" class="page-single__button page-single__button_primary">
               Simpan
             </button>
           </div>
@@ -82,6 +166,6 @@ require_once('layouts/header.php');
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>

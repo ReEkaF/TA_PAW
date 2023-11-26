@@ -1,12 +1,5 @@
-<?php
-
-require_once('../config/setup.php');
-require_once('../data/database.php');
-
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8" />

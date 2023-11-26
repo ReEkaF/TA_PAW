@@ -7,6 +7,9 @@ require_once('layouts/header.php');
 
 ?>
 
+<!-- css customs -->
+<link rel="stylesheet" href="../assets/css/admin/page-single.css">
+
 <!-- your content in here -->
 <div class="admin">
   <div class="admin__header">

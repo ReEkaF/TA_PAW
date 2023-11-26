@@ -1,104 +1,8 @@
-.content__container {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  min-height: 100vh;
-}
-.content__main {
-  padding-block: 48px 64px;
-}
-.content__footer {
-  padding-block: 24px;
-  color: #8d8d91;
-  font-size: 14px;
-  text-align: center;
-  border-top: 1px solid #e9e9e9;
-}
-.content__footer a {
-  color: #204e51;
-  text-decoration: none;
-}
-
-.graph {
-  max-height: 346px;
-}
-
-.input {
-  padding: 12px 18px;
-  font-family: "Nunito", sans-serif;
-  font-size: 16px;
-  background-color: #f6f6f6;
-  color: #000000;
-  border: none;
-  border-radius: 10px;
-  width: 100%;
-}
-.input-select {
-  width: 100%;
-  padding: 12px 18px;
-  font-family: "Nunito", sans-serif;
-  font-size: 16px;
-  appearance: none;
-  background-image: url("../../img/arrow-down-gray.png");
-  background-repeat: no-repeat;
-  background-position: right 18px center;
-  background-color: #f6f6f6;
-  color: #000000;
-  border: none;
-  border-radius: 10px;
-}
-.input-label {
-  display: block;
-  width: auto;
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-.input-help {
-  margin-block: 10px;
-}
-.input-error {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #931c32;
-}
-
-.page-single {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-.page-single img {
-  display: block;
-  height: 200px;
-  margin-inline: auto;
-  border-radius: 10px;
-}
-.page-single__actions-container {
-  display: flex;
-  justify-content: space-between;
-}
-.page-single__actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-.page-single__button {
-  display: block;
-  padding: 18px 40px;
-  background-color: #ffffff;
-  color: #204e51;
-  font-family: "Nunito", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #204e51;
-  border-radius: 12px;
-}
-.page-single__button_primary {
-  background-color: #204e51;
-  color: #ffffff;
-}
-
+/* 
+  =================================
+  styling untuk komponen sidebar
+  =================================
+ */
 .sidebar {
   position: fixed;
   top: 0;
@@ -198,6 +102,11 @@
   font-size: 16px;
 }
 
+/* 
+  =================================
+  styling untuk komponen topbar
+  =================================
+ */
 .topbar {
   position: sticky;
   top: 0;
@@ -242,7 +151,10 @@
 .topbar__profile-img {
   display: block;
   width: 40px;
+  height: 40px;
   margin-right: 8px;
+  object-fit: cover;
+  border-radius: 9999rem;
 }
 .topbar__profile-name {
   font-size: 14px;
@@ -289,10 +201,90 @@
   border-top: 1px solid #e9e9e9;
 }
 
+/* 
+  =================================
+  styling untuk komponen content
+  =================================
+ */
+.content__container {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
+}
+.content__main {
+  padding-block: 48px 64px;
+}
+.content__footer {
+  padding-block: 24px;
+  color: #8d8d91;
+  font-size: 14px;
+  text-align: center;
+  border-top: 1px solid #e9e9e9;
+}
+.content__footer a {
+  color: #204e51;
+  text-decoration: none;
+}
+
+/* 
+  =================================
+  styling untuk komponen input
+  =================================
+ */
+.input {
+  padding: 12px 18px;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  background-color: #f6f6f6;
+  color: #000000;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+}
+.input-select {
+  width: 100%;
+  padding: 12px 18px;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  appearance: none;
+  background-image: url("../../img/arrow-down-gray.png");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  background-color: #f6f6f6;
+  color: #000000;
+  border: none;
+  border-radius: 10px;
+}
+.input-label {
+  display: block;
+  width: auto;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.input-help {
+  margin-block: 10px;
+}
+.input-error {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #931c32;
+}
+
+/* 
+  =================================
+  styling untuk komponen page wrapper
+  =================================
+ */
 .page-wrapper {
   margin-left: 300px;
 }
 
+/* 
+  =================================
+  styling untuk komponen admin
+  =================================
+ */
 .admin {
   display: flex;
   flex-direction: column;

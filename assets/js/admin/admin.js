@@ -1,20 +1,5 @@
-const sidebar = () => {
-  const dropdowns = document.querySelectorAll(
-    ".sidebar__menu-list .sidebar__menu-link + .sidebar__menu-list"
-  );
-
-  dropdowns.forEach((dropdown) => {
-    dropdown.previousElementSibling.addEventListener("click", () => {
-      dropdown.previousElementSibling.classList.toggle(
-        "sidebar__menu-link_collapse"
-      );
-      dropdown.classList.toggle("sidebar__menu-list_show");
-    });
-  });
-};
-
-sidebar();
-
+// fungsi untuk komponen topbar, yang melakukan hal berikut:
+// 1. toggle class ketika elemen profil diklik, untuk menampilkan/menyembunyikan komponen dropdown.
 const topbar = (toggler) => {
   toggler.addEventListener("click", () => {
     toggler.nextElementSibling.classList.toggle(

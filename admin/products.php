@@ -1,18 +1,28 @@
 <?php
 
-$page = 'products';
-$title = 'Products';
+session_start();
 
-require_once('layouts/header.php');
+if (!isset($_SESSION['staff_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+require_once('../data/plant.php');
+
+$plants = get_plants_with_category();
+
+$page = 'products';
+$title = 'Tanaman';
+require('layouts/header.php');
 
 ?>
 
 <!-- your content in here -->
 <div class="admin">
   <div class="admin__header">
-    <h1 class="admin__title">Products</h1>
+    <h1 class="admin__title"><?= $title ?></h1>
     <div class="admin__actions">
-      <a href="./product-add.php" class="admin__button">Add Product</a>
+      <a href="./product-add.php" class="admin__button">Tambah Tanaman</a>
     </div>
   </div>
   <div class="admin__body">
@@ -21,41 +31,22 @@ require_once('layouts/header.php');
         <thead>
           <tr>
             <th>No.</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Category</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Stok</th>
+            <th>Kategori</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1.</td>
-            <td><a href="./product-single.php">Bunga Mawar</a></td>
-            <td>Rp23,000</td>
-            <td>29</td>
-            <td>Category 1</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td><a href="./product-single.php">Bunga Mawar</a></td>
-            <td>Rp23,000</td>
-            <td>29</td>
-            <td>Category 1</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td><a href="./product-single.php">Bunga Mawar</a></td>
-            <td>Rp23,000</td>
-            <td>29</td>
-            <td>Category 1</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td><a href="./product-single.php">Bunga Mawar</a></td>
-            <td>Rp23,000</td>
-            <td>29</td>
-            <td>Category 1</td>
-          </tr>
+          <?php foreach ($plants as $i => $plant) : ?>
+            <tr>
+              <td><?= $i + 1 ?>.</td>
+              <td><a href="./product-single.php?plant_id=<?= $plant['plant_id'] ?>"><?= $plant['plant_name'] ?></a></td>
+              <td>Rp<?= number_format($plant['plant_price']) ?></td>
+              <td><?= $plant['plant_stock'] ?></td>
+              <td><?= $plant['category_name'] ?></td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
@@ -65,6 +56,6 @@ require_once('layouts/header.php');
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>
