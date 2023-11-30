@@ -7,6 +7,11 @@ if (!isset($_SESSION['staff_id'])) {
   exit();
 }
 
+if ($_SESSION['role_name'] != 'administrator') {
+  header("Location: ./index.php");
+  exit();
+}
+
 if (!isset($_GET['plant_id'])) {
   header("Location: ./products.php");
   exit();

@@ -1,9 +1,20 @@
 <?php
 
-$page = 'paid-transactions';
-$title = 'Paid Transaction Single';
+session_start();
 
-require_once('layouts/header.php');
+if (!isset($_SESSION['staff_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+if ($_SESSION['role_name'] != 'manager') {
+  header("Location: ./index.php");
+  exit();
+}
+
+$page = 'paid-transactions';
+$title = 'Detail Transaksi Lunas';
+require('layouts/header.php');
 
 ?>
 
@@ -17,7 +28,7 @@ require_once('layouts/header.php');
       <i class="ph-bold ph-arrow-left"></i>
       <a href="./paid-transactions.php">Kembali</a>
     </div>
-    <h1 class="admin__title">Paid transaction single</h1>
+    <h1 class="admin__title">Detail transaksi lunas</h1>
   </div>
   <div class="admin__body">
     <div class="admin__card">
@@ -80,6 +91,6 @@ require_once('layouts/header.php');
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>

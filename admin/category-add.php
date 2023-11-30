@@ -7,6 +7,11 @@ if (!isset($_SESSION['staff_id'])) {
   exit();
 }
 
+if ($_SESSION['role_name'] != 'administrator') {
+  header("Location: ./index.php");
+  exit();
+}
+
 require_once('../data/category.php');
 require_once('../libs/validation.php');
 

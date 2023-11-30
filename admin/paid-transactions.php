@@ -1,9 +1,20 @@
 <?php
 
-$page = 'paid-transactions';
-$title = 'Paid Transactions';
+session_start();
 
-require_once('layouts/header.php');
+if (!isset($_SESSION['staff_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+if ($_SESSION['role_name'] != 'manager') {
+  header("Location: ./index.php");
+  exit();
+}
+
+$page = 'paid-transactions';
+$title = 'Transaksi Lunas';
+require('layouts/header.php');
 
 ?>
 
@@ -13,7 +24,7 @@ require_once('layouts/header.php');
 <!-- your content in here -->
 <div class="admin">
   <div class="admin__header">
-    <h1 class="admin__title">Paid transactions</h1>
+    <h1 class="admin__title">Transaksi lunas</h1>
   </div>
   <div class="admin__body">
     <form action="./paid-transactions.php" method="get" class="admin__filters">
@@ -181,6 +192,6 @@ require_once('layouts/header.php');
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>
