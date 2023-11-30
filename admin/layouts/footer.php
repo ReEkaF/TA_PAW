@@ -10,10 +10,6 @@
 </div>
 <!-- end page-wrapper -->
 
-<!-- js templates -->
-<script src="../assets/js/admin/admin.js"></script>
-
-<!-- js customs -->
 </body>
 
 </html>

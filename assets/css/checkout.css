@@ -78,11 +78,15 @@
   align-items: flex-end;
   justify-content: space-between;
 }
-.checkout__item-right a {
+.checkout__item-right button {
+  padding: 0;
+  background-color: transparent;
   color: #8d8d91;
-  text-decoration: none;
+  font-family: "Nunito", sans-serif;
+  font-size: 24px;
+  border: none;
 }
-.checkout__item-right a i {
+.checkout__item-right button i {
   display: block;
   font-size: 24px;
 }
@@ -138,11 +142,16 @@
   align-items: center;
   width: 103px;
   height: 62px;
-  border: 1px solid #e9e9e9;
   border-radius: 12px;
 }
-.checkout__method-list label input {
-  display: none;
+.checkout__method-list label span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border: 1px solid #e9e9e9;
+  border-radius: 12px;
 }
 .checkout__method-list label img {
   display: block;
@@ -159,10 +168,13 @@
   font-size: 16px;
   color: #199623;
 }
-.checkout__method-list label.active {
+.checkout__method-list label input {
+  display: none;
+}
+.checkout__method-list label input:checked ~ span {
   border: 1px solid #199623;
 }
-.checkout__method-list label.active i {
+.checkout__method-list label input:checked ~ i {
   display: block;
 }
 .checkout__button {

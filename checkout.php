@@ -76,12 +76,13 @@ require('layouts/header.php');
                 </form>
               </div>
             </div>
-            <div class="checkout__item-right">
-              <a href="#">
+            <form action="./delete-cart-item.php" method="post" class="checkout__item-right">
+              <input type="hidden" name="plant_id" value="<?= $cart_item['plant_id'] ?>">
+              <button type="submit" name="submit">
                 <i class="ph ph-x"></i>
-              </a>
+              </button>
               <p>Rp<?= number_format($subtotal) ?></p>
-            </div>
+            </form>
           </div>
           <!-- end checkuot item -->
           <hr />
@@ -105,6 +106,7 @@ require('layouts/header.php');
             <?php foreach ($payment_methods as $payment_method) : ?>
               <label>
                 <input type="radio" name="payment_method_id" value="<?= $payment_method['payment_method_id'] ?>" />
+                <span></span>
                 <i class="ph-fill ph-check-circle"></i>
                 <img src="./assets/img/banks/<?= $payment_method['payment_method_logo'] ?>" alt="<?= $payment_method['payment_method_bank'] ?>" />
               </label>
@@ -122,9 +124,6 @@ require('layouts/header.php');
   <!-- end checkout -->
 </main>
 <!-- end content -->
-
-<!-- js customs -->
-<script src="./assets/js/checkout.js"></script>
 
 <?php
 

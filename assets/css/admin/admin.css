@@ -178,7 +178,10 @@
   border-radius: 14px;
   box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
 }
-.topbar__profile-menu-list_show {
+.topbar__profile input {
+  display: none;
+}
+.topbar__profile input:checked + .topbar__profile-menu-list {
   display: flex;
 }
 .topbar__profile-menu-link {

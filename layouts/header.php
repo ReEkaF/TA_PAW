@@ -36,9 +36,10 @@
         <?php endif; ?>
         <?php if (isset($_SESSION['customer_id'])) : ?>
           <div class="navbar__profile">
-            <a href="javascript:void(0)" class="navbar__profile-toggler">
+            <label for="navbar__profile-toggler" class="navbar__profile-toggler">
               <img src="<?= $_SESSION['customer_photo'] == null ? './assets/img/default-profile.jpg' : './assets/img/profiles/' . $_SESSION['customer_photo'] ?>" alt="" class="navbar__profile-img" />
-            </a>
+            </label>
+            <input type="checkbox" id="navbar__profile-toggler">
             <div class="navbar__profile-menu-list">
               <a href="./profile.php" class="navbar__profile-menu-link">
                 <i class="ph ph-user"></i>

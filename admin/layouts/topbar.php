@@ -6,11 +6,12 @@
     </div>
     <div class="topbar__right">
       <div class="topbar__profile">
-        <a href="javascript:void(0)" class="topbar__profile-toggler">
+        <label for="topbar__profile-toggler" class="topbar__profile-toggler">
           <img src="<?= $_SESSION['staff_photo'] == null ? '../assets/img/default-profile.jpg' : '../assets/img/profiles/' . $_SESSION['staff_photo'] ?>" alt="<?= $_SESSION['staff_name'] ?>" class="topbar__profile-img" />
           <span class="topbar__profile-name"><?= $_SESSION['staff_name'] ?></span>
           <i class="ph ph-caret-right topbar__profile-dropdown-img"></i>
-        </a>
+        </label>
+        <input type="checkbox" id="topbar__profile-toggler">
         <div class="topbar__profile-menu-list">
           <a href="./logout.php" class="topbar__profile-menu-link">
             <i class="ph ph-arrow-right"></i>

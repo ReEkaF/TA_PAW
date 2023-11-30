@@ -8,7 +8,7 @@ function get_cart_items_with_plant($customer_id)
 {
   try {
     $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    $statement = $db->prepare("SELECT * FROM cart_items INNER JOIN plants ON plants.plant_id = cart_items.plant_id WHERE customer_id = :customer_id ORDER BY plant_id DESC");
+    $statement = $db->prepare("SELECT * FROM cart_items INNER JOIN plants ON plants.plant_id = cart_items.plant_id WHERE customer_id = :customer_id ORDER BY cart_items.plant_id DESC");
     $statement->bindValue(":customer_id", $customer_id);
     $statement->execute();
 
