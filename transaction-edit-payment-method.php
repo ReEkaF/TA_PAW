@@ -66,8 +66,9 @@ require('layouts/header.php');
           </h2>
           <div class="transaction-edit-method__method-list">
             <?php foreach ($payment_methods as $payment_method) : ?>
-              <label class="<?= $payment_method['payment_method_id'] == $order['payment_method_id'] ? 'active' : '' ?>">
+              <label>
                 <input type="radio" name="payment_method_id" value="<?= $payment_method['payment_method_id'] ?>" <?= $payment_method['payment_method_id'] == $order['payment_method_id'] ? 'checked' : '' ?> />
+                <span></span>
                 <i class="ph-fill ph-check-circle"></i>
                 <img src="./assets/img/banks/<?= $payment_method['payment_method_logo'] ?>" alt="<?= $payment_method['payment_method_bank'] ?>" />
               </label>
@@ -86,9 +87,6 @@ require('layouts/header.php');
   <!-- end transaction edit payment method -->
 </main>
 <!-- end content -->
-
-<!-- js customs -->
-<script src="./assets/js/transaction-edit-payment-method.js"></script>
 
 <?php
 

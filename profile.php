@@ -1,23 +1,23 @@
-<link rel="stylesheet" href="./assets/css/profile.css">
 <?php
 
 session_start();
-
-require_once('data/customer.php');
-
-$customer = find_customer_with_id($_SESSION['customer_id']);
-
-$title = 'Profil';
-require('layouts/header.php');
 
 if (!isset($_SESSION['customer_id'])) {
   header("Location: ./login.php");
   exit();
 }
+
+require_once('data/customer.php');
+
+$customer = find_customer_with_id($_SESSION['customer_id']);
+
+$title = 'Profil Saya';
+require('layouts/header.php');
+
 ?>
 
 <!-- css customs -->
-
+<link rel="stylesheet" href="./assets/css/profile.css">
 
 <!-- content -->
 <main>
@@ -28,51 +28,27 @@ if (!isset($_SESSION['customer_id'])) {
     </div>
     <div class="profile__body">
       <div class="profile__left">
-
         <img src="<?= $customer['customer_photo'] == null ? './assets/img/default-profile.jpg' : './assets/img/profiles/' . $customer['customer_photo'] ?>" alt="<?= $customer['customer_name'] ?>" />
-
       </div>
-
-      <!-- <form action="./profile.php" method="post" class="profile__right"> -->
+      <form action="./editprofile.php" method="get" class="profile__right">
         <div class="profile__form">
           <div>
-            <a class="input-label">Nama</a>
-            <a class="input" ><?= $customer['customer_name'] ?></a>
-
-           
-            <!-- <div class="input-error">Invalid name.</div> -->
+            <label for="name" class="input-label">Nama</label>
+            <input type="text" id="name" class="input" value="<?= $customer['customer_name'] ?>" readonly disabled />
           </div>
           <div>
-            <a class="input-label">Email</a>
-            <a class="input"><?= $customer['customer_email'] ?></a>
-
-            <!-- <div class="input-error">Invalid email.</div> -->
+            <label for="email" class="input-label">Email</label>
+            <input type="text" id="email" class="input" value="<?= $customer['customer_email'] ?>" readonly disabled />
           </div>
           <div>
-
-            <a class="input-label">Telepon</a>
-            <a class="input" ><?= $customer['customer_phone'] ?></a>
-
-            <!-- <div class="input-error">Invalid phone.</div> -->
+            <label for="phone" class="input-label">Telepon</label>
+            <input type="text" id="phone" class="input" value="<?= $customer['customer_phone'] ?>" readonly disabled />
           </div>
-
-          <form method="POST" action="editprofile.php">
-            <div>
-            <input type="submit" name="ubahprofil" value="UBAH DATA" class="profile__button">
-            </div>
-          </form>
-          <!-- <div>
-
-            <label for="photo" class="input-label">Foto</label>
-            <input type="file" id="photo" class="input" />
-            
-            <div class="input-error">Invalid photo.</div>
-          </div> -->
-          <!-- <div>
-            <button type="submit" class="profile__button">Simpan</button>
-          </div> -->
+          <div>
+            <button type="submit" class="profile__button">Ubah Data</button>
+          </div>
         </div>
-      <!-- </form> -->
+      </form>
     </div>
   </div>
   <!-- end profile -->

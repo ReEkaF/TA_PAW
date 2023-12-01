@@ -84,7 +84,10 @@
   border-radius: 14px;
   box-shadow: 2px 2px 20px rgba(8, 15, 52, 0.0823529412);
 }
-.navbar__profile-menu-list_show {
+.navbar__profile input {
+  display: none;
+}
+.navbar__profile input:checked + .navbar__profile-menu-list {
   display: flex;
 }
 .navbar__profile-menu-link {
@@ -234,7 +237,7 @@
 .filter {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  gap: 26px;
   padding: 84px 24px;
 }
 .filter__search {

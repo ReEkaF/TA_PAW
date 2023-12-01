@@ -7,16 +7,18 @@ if (!isset($_SESSION['staff_id'])) {
   exit();
 }
 
-$page = 'paid-transactions';
-$title = 'Transaksi Sudah Lunas';
+if ($_SESSION['role_name'] != 'manager') {
+  header("Location: ./index.php");
+  exit();
+}
 
-require_once('layouts/header.php');
+require_once('../config/database.php');
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=store', 'root', '');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $pdo = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die('Connection failed: ' . $e->getMessage());
+  die('Connection failed: ' . $e->getMessage());
 }
 
 $transid = isset($_GET['transid']) ? $_GET['transid'] : null;
@@ -33,9 +35,9 @@ $plantpricearray = array();
 $plantnamearray = array();
 
 while ($row = $plantstmt->fetch(PDO::FETCH_ASSOC)) {
-    array_push($plantquantityarray, $row['order_detail_qty']);
-    array_push($plantpricearray, $row['plant_price']);
-    array_push($plantnamearray, $row['plant_name']);
+  array_push($plantquantityarray, $row['order_detail_qty']);
+  array_push($plantpricearray, $row['plant_price']);
+  array_push($plantnamearray, $row['plant_name']);
 }
 
 $len = count($plantnamearray);
@@ -43,88 +45,94 @@ $drop = $len + 1;
 $totalprice = 0;
 $totalquantity = 0;
 
+$page = 'paid-transactions';
+$title = 'Detail Transaksi Lunas';
+require('layouts/header.php');
 
 ?>
 
+<!-- css customs -->
+<link rel="stylesheet" href="../assets/css/admin/page-single.css">
+
 <!-- your content in here -->
 <div class="admin">
-    <div class="admin__header">
-        <div class="admin__back">
-            <i class="ph-bold ph-arrow-left"></i>
-            <a href="./paid-transactions.php">Kembali</a>
-        </div>
-        <h1 class="admin__title">Paid transaction single</h1>
+  <div class="admin__header">
+    <div class="admin__back">
+      <i class="ph-bold ph-arrow-left"></i>
+      <a href="./paid-transactions.php">Kembali</a>
     </div>
-    <div class="admin__body">
-        <div class="admin__card">
-            <?php
-            echo "<p>Tanggal transaksi: " . $dateorder . "</p>";
-            ?>
-        </div>
-        <div class="admin__card">
-            <table>
-                <?php
-                for ($rait = 0; $rait <= $drop; $rait++) {
-                    for ($don = 0; $don <= 4; $don++) {
-                        if ($rait == 0) {
-                            if ($don == 0) {
-                                echo "<thead><tr><th>No.</th>";
-                            } else if ($don == 1) {
-                                echo '<th>Plants</th>';
-                            } else if ($don == 2) {
-                                echo '<th>Price</th>';
-                            } else if ($don == 3) {
-                                echo '<th>Quantity</th>';
-                            } else {
-                                echo '<th>Sub-Total</th>';
-                            }
-                        } else if ($rait == $drop) {
-                            if ($don == 0) {
-                                echo '<tfoot><tr><td>total</td>';
-                            } else if ($don == 3) { // untuk total kuantitas
-                                echo "<td>$totalquantity</td>";
-                            } else if ($don == 4) { // untuk total harga
-                                echo "<td>Rp. $totalprice</td></tfoot>";
-                            } else {
-                                echo '<td> </td>';
-                            }
-                        } else if ($don == 0 && $rait != 0) {
-                            if ($rait != $drop) {
-                                if ($rait == 1) {
-                                    echo '<tbody><tr><td>' . $rait . '</td>';
-                                } else {
-                                    echo '<tr><td>' . $rait . '</td>';
-                                }
-                            }
-                        } else if ($don == 1 && $rait != 0 && $rait != $drop) { // kolom 1 untuk nama produk
-                            echo '<td>' . $plantnamearray[$rait - 1] . '</td>';
-                        } else if ($don == 2 && $rait != 0 && $rait != $drop) { // kolom 2 untuk harga produk
-                            echo '<td>Rp. ' . $plantpricearray[$rait - 1] . '</td>';
-                        } else if ($don == 3 && $rait != 0 && $rait != $drop) { // kolom 3 untuk kuantitas produk
-                            echo '<td>' . $plantquantityarray[$rait - 1] . '</td>';
-                            $totalquantity+=$plantquantityarray[$rait - 1];
-                        } else {
-                            if ($rait != $len) { // kolom 4 untuk sub-total
-                                echo '<td>Rp. ' . $plantpricearray[$rait - 1] * $plantquantityarray[$rait - 1] . '</td>';
-                                $totalprice = $totalprice + $plantpricearray[$rait - 1] * $plantquantityarray[$rait - 1];
-                            } else if ($rait == $len) {
-                                echo '<td>Rp. ' . $plantpricearray[$rait - 1] * $plantquantityarray[$rait - 1] . '</td><tbody>';
-                                $totalprice = $totalprice + $plantpricearray[$rait - 1] * $plantquantityarray[$rait - 1];
-                            } else {
-                                echo '<td> </td>';
-                            }
-                        }
-                    }
+    <h1 class="admin__title">Detail transaksi lunas</h1>
+  </div>
+  <div class="admin__body">
+    <div class="admin__card">
+      <?php
+      echo "<p>Tanggal transaksi: " . date('d M Y', strtotime($dateorder)) . "</p>";
+      ?>
+    </div>
+    <div class="admin__card">
+      <table>
+        <?php
+        for ($rait = 0; $rait <= $drop; $rait++) {
+          for ($don = 0; $don <= 4; $don++) {
+            if ($rait == 0) {
+              if ($don == 0) {
+                echo "<thead><tr><th>No.</th>";
+              } else if ($don == 1) {
+                echo '<th>Tanaman</th>';
+              } else if ($don == 2) {
+                echo '<th>Harga</th>';
+              } else if ($don == 3) {
+                echo '<th>Kuantitas</th>';
+              } else {
+                echo '<th>Subtotal</th>';
+              }
+            } else if ($rait == $drop) {
+              if ($don == 0) {
+                echo '<tfoot><tr><td>Total</td>';
+              } else if ($don == 3) { // untuk total kuantitas
+                echo "<td>$totalquantity</td>";
+              } else if ($don == 4) { // untuk total harga
+                echo "<td>Rp" . number_format($totalprice) . "</td></tfoot>";
+              } else {
+                echo '<td> </td>';
+              }
+            } else if ($don == 0 && $rait != 0) {
+              if ($rait != $drop) {
+                if ($rait == 1) {
+                  echo '<tbody><tr><td>' . $rait . '</td>';
+                } else {
+                  echo '<tr><td>' . $rait . '</td>';
                 }
-                ?>
-            </table>
-        </div>
+              }
+            } else if ($don == 1 && $rait != 0 && $rait != $drop) { // kolom 1 untuk nama produk
+              echo '<td>' . $plantnamearray[$rait - 1] . '</td>';
+            } else if ($don == 2 && $rait != 0 && $rait != $drop) { // kolom 2 untuk harga produk
+              echo '<td>Rp' . number_format($plantpricearray[$rait - 1]) . '</td>';
+            } else if ($don == 3 && $rait != 0 && $rait != $drop) { // kolom 3 untuk kuantitas produk
+              echo '<td>' . $plantquantityarray[$rait - 1] . '</td>';
+              $totalquantity += $plantquantityarray[$rait - 1];
+            } else {
+              if ($rait != $len) { // kolom 4 untuk sub-total
+                echo '<td>Rp' . number_format($plantpricearray[$rait - 1] * $plantquantityarray[$rait - 1]) . '</td>';
+                $totalprice = $totalprice + $plantpricearray[$rait - 1] * $plantquantityarray[$rait - 1];
+              } else if ($rait == $len) {
+                echo '<td>Rp' . number_format($plantpricearray[$rait - 1] * $plantquantityarray[$rait - 1]) . '</td><tbody>';
+                $totalprice = $totalprice + $plantpricearray[$rait - 1] * $plantquantityarray[$rait - 1];
+              } else {
+                echo '<td> </td>';
+              }
+            }
+          }
+        }
+        ?>
+      </table>
     </div>
+  </div>
 </div>
 <!-- end your content in here -->
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>

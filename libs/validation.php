@@ -106,28 +106,27 @@ function validate_email_customer(&$errors, $field_list, $field_name)
   }
 
   $customers = get_customers();
-  if (isset($_SESSION['customer_id'])){
+  if (isset($_SESSION['customer_id'])) {
     $emailcust = get_email_customer($_SESSION['customer_id']);
 
-    if ($field_list[$field_name] != $emailcust['customer_email']){
+    if ($field_list[$field_name] != $emailcust['customer_email']) {
       foreach ($customers as $customer) {
-      
+
         if ($customer['customer_email'] == $field_list[$field_name]) {
           $errors[$field_name] = 'Email telah terdaftar, gunakan email lain!';
           return false;
         }
       }
     }
-  }else {
+  } else {
     foreach ($customers as $customer) {
-      
+
       if ($customer['customer_email'] == $field_list[$field_name]) {
         $errors[$field_name] = 'Email telah terdaftar, gunakan email lain!';
         return false;
       }
     }
   }
-  
 
   if (preg_match('/\s/', $field_list[$field_name])) {
     $errors[$field_name] = 'Masukan tidak boleh mengandung spasi!';
@@ -142,7 +141,6 @@ function validate_email_customer(&$errors, $field_list, $field_name)
 
   return true;
 }
-
 
 function validate_email_staff(&$errors, $field_list, $field_name)
 {

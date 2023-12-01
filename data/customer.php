@@ -25,7 +25,7 @@ function find_customer_with_id($id)
   try {
     $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     $statement = $db->prepare("SELECT * FROM customers WHERE customer_id = :id");
-    $statement->bindValue(":id", htmlspecialchars(trim($id)));
+    $statement->bindValue(":id", $id);
     $statement->execute();
 
     $customer = $statement->fetch(PDO::FETCH_ASSOC);
@@ -55,7 +55,8 @@ function get_email_customer($id)
 {
   try {
     $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    $statement = $db->prepare("SELECT customer_email FROM customers where customer_id = {$id}");
+    $statement = $db->prepare("SELECT customer_email FROM customers WHERE customer_id = :id");
+    $statement->bindValue(":id", $id);
     $statement->execute();
 
     $customers = $statement->fetch(PDO::FETCH_ASSOC);

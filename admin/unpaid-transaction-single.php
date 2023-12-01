@@ -7,10 +7,31 @@ if (!isset($_SESSION['staff_id'])) {
   exit();
 }
 
-$page = 'unpaid-transactions';
-$title = 'Unpaid Transaction Single';
+if ($_SESSION['role_name'] != 'administrator') {
+  header("Location: ./index.php");
+  exit();
+}
 
-require_once('layouts/header.php');
+if (!isset($_GET['order_id'])) {
+  header("Location: ./unpaid-transactions.php");
+  exit();
+}
+
+require_once('../data/transaction.php');
+
+$order_info = get_order_details_admin($_GET['order_id']);
+$date_bank = get_date_bank($_GET["order_id"]);
+$result = 0;
+$result_qty = 0;
+
+if (!$date_bank) {
+  header("Location: ./unpaid-transactions.php");
+  exit();
+}
+
+$page = 'unpaid-transactions';
+$title = 'Detail Transaksi Belum Lunas';
+require('layouts/header.php');
 
 ?>
 
@@ -24,62 +45,50 @@ require_once('layouts/header.php');
       <i class="ph-bold ph-arrow-left"></i>
       <a href="./unpaid-transactions.php">Kembali</a>
     </div>
-    <h1 class="admin__title">Unpaid transaction single</h1>
+    <h1 class="admin__title">Detail transaksi belum lunas</h1>
     <div class="admin__actions">
-      <a href="./unpaid-transactions.php" class="admin__button">Mark as Paid</a>
+      <?php if ($date_bank["order_status"] == "unpaid") : ?>
+        <a href="./unpaid-transaction-approved.php?order_id=<?= $date_bank["order_id"] ?>" class="admin__button">Tandai sebagai terbayar</a>
+      <?php else : ?>
+        <span class="badge <?= $date_bank['order_status'] == 'paid' ? 'badge_success' : 'badge_danger' ?>"><?= $date_bank['order_status'] ?></span>
+      <?php endif; ?>
     </div>
   </div>
   <div class="admin__body">
     <div class="admin__card">
-      <p>Tanggal transaksi: 17 Nov 2023</p>
-      <p>Metode pembayaran: Bank BCA</p>
+      <p>Tanggal transaksi: <?= date('d M Y', strtotime($date_bank['order_date'])) ?></p>
+      <p>Metode pembayaran: Bank <?= $date_bank["payment_method_bank"] ?></p>
     </div>
     <div class="admin__card">
       <table>
         <thead>
           <tr>
             <th>No.</th>
-            <th>Plant</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th>Tanaman</th>
+            <th>Harga</th>
+            <th>Kuantitas</th>
             <th>Subtotal</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1.</td>
-            <td>Bunga Mawar</td>
-            <td>Rp23,000</td>
-            <td>29</td>
-            <td>Category 1</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Bunga Mawar</td>
-            <td>Rp23,000</td>
-            <td>29</td>
-            <td>Category 1</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Bunga Mawar</td>
-            <td>Rp23,000</td>
-            <td>29</td>
-            <td>Category 1</td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>Bunga Mawar</td>
-            <td>Rp23,000</td>
-            <td>29</td>
-            <td>Category 1</td>
-          </tr>
+          <?php foreach ($order_info as $i => $ord) : ?>
+            <tr>
+              <td><?= $i + 1 ?></td>
+              <td><?= $ord["plant_name"] ?></td>
+              <td>Rp<?= number_format($ord["plant_price"]) ?></td>
+              <td><?= $ord["order_detail_qty"] ?></td>
+              <?php $sum_price = order_detail_sum($ord["plant_price"], $ord["order_detail_qty"]) ?>
+              <td>Rp<?= number_format($sum_price) ?></td>
+              <?php $result += $sum_price;
+              $result_qty += $ord["order_detail_qty"]; ?>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
         <tfoot>
           <tr>
             <td colspan="3">Total</td>
-            <td>23</td>
-            <td>34</td>
+            <td><?= $result_qty ?></td>
+            <td>Rp<?= number_format($result) ?></td>
           </tr>
         </tfoot>
       </table>
@@ -90,6 +99,6 @@ require_once('layouts/header.php');
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>

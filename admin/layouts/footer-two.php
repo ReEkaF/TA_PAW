@@ -25,10 +25,6 @@
 </div>
 <!-- end footer -->
 
-<!-- js templates -->
-<script src="../assets/js/customer.js"></script>
-
-<!-- js customs -->
 </body>
 
 </html>
