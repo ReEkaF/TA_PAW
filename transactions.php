@@ -1,16 +1,17 @@
 <?php
 
 session_start();
-
+  // cek apakah cust sudah login
 if (!isset($_SESSION['customer_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
 require_once('data/order.php');
-
+// AMBIL SELURUH ORDERAN CUST X
 $orders = get_orders($_SESSION['customer_id']);
 
+// HEADER
 $title = 'Transaksi';
 require('layouts/header.php');
 
@@ -28,6 +29,7 @@ require('layouts/header.php');
     </div>
     <div class="transactions__body">
       <table class="transactions__table">
+        <!-- JUDUL -->
         <thead>
           <tr>
             <th>No. Transaksi</th>
@@ -37,14 +39,20 @@ require('layouts/header.php');
           </tr>
         </thead>
         <tbody>
+          <!-- TAMPILKAN ORDERAN CUST X -->
           <?php foreach ($orders as $order) : ?>
             <tr>
+              <!-- LIHAT LEBIH DETAIL -->
               <td><a href="./transaction-single.php?order_id=<?= $order['order_id'] ?>">#FF<?= $order['order_id'] ?></a></td>
+              <!-- TGL TRX -->
               <td><?= date('d M Y', strtotime($order['order_date'])) ?></td>
+              <!-- TOTAL PER ORDER -->
               <td>Rp<?= number_format($order['order_total_price']) ?></td>
+              <!-- STATUS ORDER -->
               <td><span class="badge <?= $order['order_status'] == 'paid' ? 'badge_success' : 'badge_danger' ?>"><?= $order['order_status'] ?></span></td>
             </tr>
           <?php endforeach; ?>
+          <!-- JIKA ORDERAN MASIH KOSONG -->
           <?php if (empty($orders)) : ?>
             <tr>
               <td colspan="4" class="transactions__empty">Anda belum memiliki transaksi!</td>
@@ -59,7 +67,7 @@ require('layouts/header.php');
 <!-- end content -->
 
 <?php
-
+// FOOTER
 require('layouts/footer.php');
 
 ?>
