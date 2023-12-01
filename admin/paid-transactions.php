@@ -10,7 +10,19 @@ if (!isset($_SESSION['staff_id'])) {
 $page = 'paid-transactions';
 $title = 'Transaksi Sudah Lunas';
 
-require_once('layouts/header.php');
+if (!isset($_SESSION['staff_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
+
+if ($_SESSION['role_name'] != 'manager') {
+  header("Location: ./index.php");
+  exit();
+}
+
+$page = 'paid-transactions';
+$title = 'Transaksi Lunas';
+require('layouts/header.php');
 
 // Database configuration
 $dbHost = 'localhost';
@@ -197,6 +209,6 @@ try {
 
 <?php
 
-require_once('layouts/footer.php');
+require('layouts/footer.php');
 
 ?>
