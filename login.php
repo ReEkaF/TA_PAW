@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
     $login_error = 'Email atau password salah!';
   }
 
-  $old_inputs['email'] = $_POST['email'];
+  $old_inputs['email'] = htmlspecialchars($_POST['email']);
 }
 
 $title = 'Login';

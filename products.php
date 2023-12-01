@@ -10,7 +10,7 @@ if (!isset($_SESSION['customer_id'])) {
 require_once('data/plant.php');
 require_once('data/category.php');
 
-$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+$keyword = htmlspecialchars(isset($_GET['keyword']) ? $_GET['keyword'] : '');
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
 
 $categories = get_categories();
