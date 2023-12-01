@@ -30,25 +30,25 @@ require('layouts/header.php');
       <div class="profile__left">
         <img src="<?= $customer['customer_photo'] == null ? './assets/img/default-profile.jpg' : './assets/img/profiles/' . $customer['customer_photo'] ?>" alt="<?= $customer['customer_name'] ?>" />
       </div>
-      <form action="./editprofile.php" method="get" class="profile__right">
+      <div class="profile__right">
         <div class="profile__form">
           <div>
-            <label for="name" class="input-label">Nama</label>
-            <input type="text" id="name" class="input" value="<?= $customer['customer_name'] ?>" readonly disabled />
+            <div class="input-label">Nama:</div>
+            <div class="input-label"><?= $customer['customer_name'] ?></div>
           </div>
           <div>
-            <label for="email" class="input-label">Email</label>
-            <input type="text" id="email" class="input" value="<?= $customer['customer_email'] ?>" readonly disabled />
+            <div class="input-label">Email:</div>
+            <div class="input-label"><?= $customer['customer_email'] ?></div>
           </div>
           <div>
-            <label for="phone" class="input-label">Telepon</label>
-            <input type="text" id="phone" class="input" value="<?= $customer['customer_phone'] ?>" readonly disabled />
+            <div class="input-label">Telepon:</div>
+            <div class="input-label"><?= $customer['customer_phone'] ?></div>
           </div>
-          <div>
+          <form action="./editprofile.php" method="get">
             <button type="submit" class="profile__button">Ubah Data</button>
-          </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   </div>
   <!-- end profile -->
