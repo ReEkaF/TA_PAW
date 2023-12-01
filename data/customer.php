@@ -20,6 +20,22 @@ function find_customer($email)
   }
 }
 
+function find_customer_with_id($id)
+{
+  try {
+    $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $statement = $db->prepare("SELECT * FROM customers WHERE customer_id = :id");
+    $statement->bindValue(":id", htmlspecialchars(trim($id)));
+    $statement->execute();
+
+    $customer = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $customer;
+  } catch (PDOException $error) {
+    throw new Exception($error->getMessage());
+  }
+}
+
 function get_customers()
 {
   try {
@@ -28,6 +44,21 @@ function get_customers()
     $statement->execute();
 
     $customers = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $customers;
+  } catch (PDOException $error) {
+    throw new Exception($error->getMessage());
+  }
+}
+
+function get_email_customer($id)
+{
+  try {
+    $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $statement = $db->prepare("SELECT customer_email FROM customers where customer_id = {$id}");
+    $statement->execute();
+
+    $customers = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $customers;
   } catch (PDOException $error) {
