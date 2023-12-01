@@ -77,7 +77,7 @@ require('layouts/header.php');
               <td><?= $ord["plant_name"] ?></td>
               <td>Rp<?= number_format($ord["plant_price"]) ?></td>
               <td><?= $ord["order_detail_qty"] ?></td>
-              <?php $sum_price = order_detail_sum($ord["plant_price"], $ord["order_detail_qty"]) ?>
+              <?php $sum_price = $ord["plant_price"] * $ord["order_detail_qty"] ?>
               <td>Rp<?= number_format($sum_price) ?></td>
               <?php $result += $sum_price;
               $result_qty += $ord["order_detail_qty"]; ?>

@@ -40,25 +40,6 @@ function get_order_sum($data)
   }
 }
 
-function order_detail_sum($harga, $qty)
-{
-  try {
-    $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    $statement = $db->prepare("SELECT ($harga*$qty) as total_sum from order_details ");
-    $statement->execute();
-
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-    if (!empty($result)) {
-      return $result['total_sum'];
-    } else {
-      return 0; // Return 0 if there are no matching records
-    }
-  } catch (PDOException $error) {
-    throw new Exception($error->getMessage());
-  }
-}
-
 function approve_order($data)
 {
   try {
