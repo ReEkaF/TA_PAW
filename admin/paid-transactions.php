@@ -1,5 +1,6 @@
 <?php
 
+error_reporting(E_ALL);
 session_start();
 
 if (!isset($_SESSION['staff_id'])) {
@@ -36,12 +37,65 @@ require('layouts/header.php');
     <h1 class="admin__title">Transaksi lunas</h1>
   </div>
   <div class="admin__body">
+
+    <?php
+    // Prepare statements grafik
+    $tanggalpenjualan = $pdo->prepare("SELECT order_date FROM orders WHERE order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend GROUP BY order_date");
+    $penjualan = $pdo->prepare("SELECT SUM(order_total_price) AS sold FROM orders WHERE order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend GROUP BY order_date");
+
+    $paymentmethod = $pdo->prepare("SELECT payment_method_bank FROM payment_methods paymet, orders ord WHERE paymet.payment_method_id = ord.payment_method_id AND order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend ORDER BY order_date");
+    $orderdate = $pdo->prepare("SELECT order_date FROM orders WHERE order_status = 'paid'AND order_date BETWEEN :datestart AND :dateend ORDER BY order_date");
+    $plantquantity = $pdo->prepare("SELECT SUM(ordet.order_detail_qty) AS quantity FROM order_details ordet, orders ord WHERE ord.order_id = ordet.order_id AND ord.order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend GROUP BY ord.order_id ORDER BY ord.order_date");
+    $orderprice = $pdo->prepare("SELECT order_total_price FROM orders WHERE order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend ORDER BY order_date");
+    $linkid = $pdo->prepare("SELECT order_id FROM orders WHERE order_status = 'paid' AND order_date BETWEEN '1023-01-01' AND '5023-12-12' ORDER BY order_date");
+
+    // Bind parameter
+    $datestart = isset($_GET['datestart']) ? $_GET['datestart'] : '1900-01-01';
+    $dateend = isset($_GET['dateend']) ? $_GET['dateend'] : date('Y-m-d');
+
+    $tanggalpenjualan->bindParam(':datestart', $datestart);
+    $tanggalpenjualan->bindParam(':dateend', $dateend);
+    $penjualan->bindParam(':datestart', $datestart);
+    $penjualan->bindParam(':dateend', $dateend);
+
+    $paymentmethod->bindParam(':datestart', $datestart);
+    $paymentmethod->bindParam(':dateend', $dateend);
+    $orderdate->bindParam(':datestart', $datestart);
+    $orderdate->bindParam(':dateend', $dateend);
+    $plantquantity->bindParam(':datestart', $datestart);
+    $plantquantity->bindParam(':dateend', $dateend);
+    $orderprice->bindParam(':datestart', $datestart);
+    $orderprice->bindParam(':dateend', $dateend);
+
+    // Execute query
+    $tanggalpenjualan->execute();
+    $penjualan->execute();
+    $paymentmethod->execute();
+    $orderdate->execute();
+    $plantquantity->execute();
+    $orderprice->execute();
+    $linkid->execute();
+
+    // Fetch data
+    $paymentmethodarray = $paymentmethod->fetchAll(PDO::FETCH_ASSOC);
+    $orderdatearray = $orderdate->fetchAll(PDO::FETCH_ASSOC);
+    $plantquantityarray = $plantquantity->fetchAll(PDO::FETCH_ASSOC);
+    $orderpricearray = $orderprice->fetchAll(PDO::FETCH_ASSOC);
+    $linkidarray = $linkid->fetchAll(PDO::FETCH_ASSOC);
+
+    $len = count($orderdatearray);
+    $drop = $len + 1; //tinggi tabel sesuai banyak data + 1
+    $totalquantity = 0;
+    $totalprice = 0;
+    ?>
+
     <!-- filter tanggal -->
     <form action="./paid-transactions.php" method="get" class="admin__filters">
-      <input type="date" class="input" name="datestart">
+      <input type="date" class="input" name="datestart" value="<?= $datestart ?>">
       <span>sampai</span>
-      <input type="date" class="input" name="dateend">
+      <input type="date" class="input" name="dateend" value="<?= $dateend ?>">
       <button class="admin__button">Filter</button>
+      <a href="./paid-transactions.php" class="admin__button">Reset</a>
     </form>
     <div class="admin__card">
       <h2 class="admin__card-title">Grafik</h2>
@@ -53,55 +107,6 @@ require('layouts/header.php');
       <!-- tabel laporan -->
       <table>
         <?php
-        // Prepare statements grafik
-        $tanggalpenjualan = $pdo->prepare("SELECT order_date FROM orders WHERE order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend GROUP BY order_date");
-        $penjualan = $pdo->prepare("SELECT SUM(order_total_price) AS sold FROM orders WHERE order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend GROUP BY order_date");
-
-        $paymentmethod = $pdo->prepare("SELECT payment_method_bank FROM payment_methods paymet, orders ord WHERE paymet.payment_method_id = ord.payment_method_id AND order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend ORDER BY order_date");
-        $orderdate = $pdo->prepare("SELECT order_date FROM orders WHERE order_status = 'paid'AND order_date BETWEEN :datestart AND :dateend ORDER BY order_date");
-        $plantquantity = $pdo->prepare("SELECT SUM(ordet.order_detail_qty) AS quantity FROM order_details ordet, orders ord WHERE ord.order_id = ordet.order_id AND ord.order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend GROUP BY ord.order_id ORDER BY ord.order_date");
-        $orderprice = $pdo->prepare("SELECT order_total_price FROM orders WHERE order_status = 'paid' AND order_date BETWEEN :datestart AND :dateend ORDER BY order_date");
-        $linkid = $pdo->prepare("SELECT order_id FROM orders WHERE order_status = 'paid' AND order_date BETWEEN '1023-01-01' AND '5023-12-12' ORDER BY order_date");
-
-        // Bind parameter
-        $datestart = isset($_GET['datestart']) ? $_GET['datestart'] : '200-01-01';
-        $dateend = isset($_GET['dateend']) ? $_GET['dateend'] : '5000-01-01';
-
-        $tanggalpenjualan->bindParam(':datestart', $datestart);
-        $tanggalpenjualan->bindParam(':dateend', $dateend);
-        $penjualan->bindParam(':datestart', $datestart);
-        $penjualan->bindParam(':dateend', $dateend);
-
-        $paymentmethod->bindParam(':datestart', $datestart);
-        $paymentmethod->bindParam(':dateend', $dateend);
-        $orderdate->bindParam(':datestart', $datestart);
-        $orderdate->bindParam(':dateend', $dateend);
-        $plantquantity->bindParam(':datestart', $datestart);
-        $plantquantity->bindParam(':dateend', $dateend);
-        $orderprice->bindParam(':datestart', $datestart);
-        $orderprice->bindParam(':dateend', $dateend);
-
-        // Execute query
-        $tanggalpenjualan->execute();
-        $penjualan->execute();
-        $paymentmethod->execute();
-        $orderdate->execute();
-        $plantquantity->execute();
-        $orderprice->execute();
-        $linkid->execute();
-
-        // Fetch data
-        $paymentmethodarray = $paymentmethod->fetchAll(PDO::FETCH_ASSOC);
-        $orderdatearray = $orderdate->fetchAll(PDO::FETCH_ASSOC);
-        $plantquantityarray = $plantquantity->fetchAll(PDO::FETCH_ASSOC);
-        $orderpricearray = $orderprice->fetchAll(PDO::FETCH_ASSOC);
-        $linkidarray = $linkid->fetchAll(PDO::FETCH_ASSOC);
-
-        $len = count($orderdatearray);
-        $drop = $len + 1; //tinggi tabel sesuai banyak data + 1
-        $totalquantity = 0;
-        $totalprice = 0;
-
         for ($rait = 0; $rait <= $drop; $rait++) { //$don = kolom tabel, $rait = baris tabel
           for ($don = 0; $don <= 5; $don++) {
             if ($rait == 0) { //header tabel

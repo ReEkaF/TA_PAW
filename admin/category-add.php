@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
     exit();
   }
 
-  $old_inputs['name'] = $_POST['name'];
+  $old_inputs['name'] = htmlspecialchars($_POST['name']);
 }
 
 $page = 'categories';

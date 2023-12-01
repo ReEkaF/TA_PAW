@@ -31,10 +31,10 @@ if (isset($_POST['submit'])) {
     exit();
   }
 
-  $old_inputs['name'] = $_POST['name'];
-  $old_inputs['phone'] = $_POST['phone'];
-  $old_inputs['email'] = $_POST['email'];
-  $old_inputs['token'] = $_POST['token'];
+  $old_inputs['name'] = htmlspecialchars($_POST['name']);
+  $old_inputs['phone'] = htmlspecialchars($_POST['phone']);
+  $old_inputs['email'] = htmlspecialchars($_POST['email']);
+  $old_inputs['token'] = htmlspecialchars($_POST['token']);
 }
 
 $title = 'Registrasi Staff';

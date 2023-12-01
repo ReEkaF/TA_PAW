@@ -50,15 +50,15 @@ require('layouts/header.php');
         <img src="<?= $customer['customer_photo'] == null ? '../assets/img/default-profile.jpg' : '../assets/img/profiles/' . $customer['customer_photo'] ?>" alt="<?= $customer['customer_name'] ?>" class="page-single__img" />
         <div>
           <label for="name" class="input-label">Nama</label>
-          <input type="text" id="name" class="input" value="<?= $customer['customer_name'] ?>" readonly />
+          <input type="text" id="name" class="input" value="<?= $customer['customer_name'] ?>" readonly disabled />
         </div>
         <div>
           <label for="phone" class="input-label">Telepon</label>
-          <input type="text" id="phone" class="input" value="<?= $customer['customer_phone'] ?>" readonly />
+          <input type="text" id="phone" class="input" value="<?= $customer['customer_phone'] ?>" readonly disabled />
         </div>
         <div>
           <label for="email" class="input-label">Email</label>
-          <input type="text" id="email" class="input" value="<?= $customer['customer_email'] ?>" readonly />
+          <input type="text" id="email" class="input" value="<?= $customer['customer_email'] ?>" readonly disabled />
         </div>
       </div>
     </div>

@@ -63,11 +63,11 @@ if (isset($_POST['submit'])) {
     exit();
   }
 
-  $old_inputs['supplier_id'] = $_POST['supplier_id'];
-  $old_inputs['category_id'] = $_POST['category_id'];
-  $old_inputs['name'] = $_POST['name'];
-  $old_inputs['price'] = $_POST['price'];
-  $old_inputs['stock'] = $_POST['stock'];
+  $old_inputs['supplier_id'] = htmlspecialchars($_POST['supplier_id']);
+  $old_inputs['category_id'] = htmlspecialchars($_POST['category_id']);
+  $old_inputs['name'] = htmlspecialchars($_POST['name']);
+  $old_inputs['price'] = htmlspecialchars($_POST['price']);
+  $old_inputs['stock'] = htmlspecialchars($_POST['stock']);
 }
 
 $page = 'products';

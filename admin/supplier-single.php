@@ -45,9 +45,9 @@ if (isset($_POST['submit'])) {
     exit();
   }
 
-  $old_inputs['name'] = $_POST['name'];
-  $old_inputs['phone'] = $_POST['phone'];
-  $old_inputs['address'] = $_POST['address'];
+  $old_inputs['name'] = htmlspecialchars($_POST['name']);
+  $old_inputs['phone'] = htmlspecialchars($_POST['phone']);
+  $old_inputs['address'] = htmlspecialchars($_POST['address']);
 }
 
 $page = 'suppliers';
