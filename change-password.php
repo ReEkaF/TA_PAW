@@ -56,13 +56,13 @@ require('layouts/header.php');
           <div>
 
             <label for="password" class="input-label">Password Baru <span class="text-danger">*</span></label>
-            <input type="text" id="password" name="password" class="input" value="<?= isset($_POST['password']) ? $_POST['password'] : ''  ?>" />
+            <input type="password" id="password" name="password" class="input" value="<?= isset($_POST['password']) ? $_POST['password'] : ''  ?>" />
             <div class="input-help">Harus berisi 8-16 karakter dengan minimal 1 huruf besar, 1 huruf kecil, 1 karakter spesial, dan tidak boleh mengandung spasi.</div>
             <div class="input-error"><?= isset($errors['password']) ? $errors['password'] : '' ?></div>
           </div>
           <div>
             <label for="confirm_password" class="input-label">Ketik Ulang Password <span class="text-danger">*</span></label>
-            <input type="text" id="confirm_password" name="confirm_password" class="input" />
+            <input type="password" id="confirm_password" name="confirm_password" class="input" />
             <div class="input-error"><?= isset($errors['confirm_password']) ? $errors['confirm_password'] : '' ?></div>
           </div>
           <div>
