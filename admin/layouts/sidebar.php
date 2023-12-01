@@ -11,12 +11,22 @@
           Beranda
         </a>
       </li>
+      <?php if ($_SESSION['role_name'] == 'manager') : ?>
+      <li class="sidebar__menu-item">
+        <a href="./manager-unpaid-transactions.php" class="sidebar__menu-link <?= $page === 'unpaid-transactions' ? 'sidebar__menu-link_active' : ''; ?>">
+          <i class="ph ph-fire"></i>
+          Transaksi Belum Lunas
+        </a>
+      </li>
+      <?php endif; ?>
+      <?php if ($_SESSION['role_name'] == 'administrator') : ?>
       <li class="sidebar__menu-item">
         <a href="./unpaid-transactions.php" class="sidebar__menu-link <?= $page === 'unpaid-transactions' ? 'sidebar__menu-link_active' : ''; ?>">
           <i class="ph ph-fire"></i>
           Transaksi Belum Lunas
         </a>
       </li>
+      <?php endif; ?>
       <?php if ($_SESSION['role_name'] == 'manager') : ?>
         <li class="sidebar__menu-item">
           <a href="./paid-transactions.php" class="sidebar__menu-link <?= $page === 'paid-transactions' ? 'sidebar__menu-link_active' : ''; ?>">
