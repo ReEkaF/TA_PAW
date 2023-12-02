@@ -27,9 +27,9 @@
           // UPDATE DATA DIRI CUST
           $db = new PDO('mysql:host=localhost;dbname=' . DB_NAME, DB_USERNAME, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
           $ubahdata = $db->prepare("UPDATE customers set customer_name = :custname, customer_phone = :custphone, customer_email = :custemail where customer_id = :custid ");
-          $ubahdata->bindValue(":custname",$_POST['nama']);
-          $ubahdata->bindValue(":custphone",$_POST['telephone']);
-          $ubahdata->bindValue(":custemail",$_POST['email']);
+          $ubahdata->bindValue(":custname", htmlspecialchars(trim($_POST['nama'])));
+          $ubahdata->bindValue(":custphone", htmlentities(trim($_POST['telephone'])));
+          $ubahdata->bindValue(":custemail", htmlspecialchars(trim($_POST['email'])));
           $ubahdata->bindValue(":custid",$_SESSION['customer_id']);    
           $ubahdata->execute();
 
@@ -62,19 +62,19 @@
           <div>
             <!-- INPUT NAMA  -->
             <label class="input-label" for='nama'>Nama</label>
-            <input type='text' name='nama' id='nama' class="input" value="<?php if(isset($_POST['nama'])) echo $_POST['nama']; else echo $customer['customer_name'];?>">
+            <input type='text' name='nama' id='nama' class="input" value="<?= isset($_POST['nama']) ? htmlspecialchars($_POST['nama']) : $customer['customer_name']; ?>">
             <div class="input-error"><?php if (isset($errors['nama'])) echo $errors['nama']?></div>
           </div>
           <div>
             <!-- INPUT EMAIL -->
             <label class="input-label" for='email'>Email</label>
-            <input type='text' name='email' id='email' class="input" value="<?php if(isset($_POST['email'])) echo $_POST['email']; else echo $customer['customer_email']; ?>">
+            <input type='text' name='email' id='email' class="input" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : $customer['customer_email']; ?>">
             <div class="input-error"><?php if (isset($errors['email'])) echo $errors['email']?></div>
           </div>
           <div>
             <!-- INPUT NO TELP -->
             <label class="input-label" for='telephone'>Telephone</label>
-            <input type='text' name='telephone' id='telephone' class="input" value="<?php if(isset($_POST['telephone'])) echo $_POST['telephone']; else echo $customer['customer_phone'];?>">
+            <input type='text' name='telephone' id='telephone' class="input" value="<?= isset($_POST['telephone']) ? htmlspecialchars($_POST['telephone']) : $customer['customer_phone']; ?>">
             <div class="input-error"><?php if (isset($errors['telephone'])) echo $errors['telephone']?></div>
           </div>
           <div>
