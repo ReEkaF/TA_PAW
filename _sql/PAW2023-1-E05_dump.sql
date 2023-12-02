@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 26, 2023 at 07:41 PM
+-- Generation Time: Dec 02, 2023 at 07:51 PM
 -- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.14
 
@@ -67,17 +67,16 @@ CREATE TABLE `customers` (
   `customer_name` varchar(255) NOT NULL,
   `customer_phone` varchar(17) NOT NULL,
   `customer_email` varchar(255) NOT NULL,
-  `customer_password` varchar(255) NOT NULL,
-  `customer_photo` varchar(255) DEFAULT NULL
+  `customer_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`customer_id`, `customer_name`, `customer_phone`, `customer_email`, `customer_password`, `customer_photo`) VALUES
-(1, 'Naufal Alifiansyah', '081234567891', 'naufal@example.com', '$2y$10$YpsuVarBbWQP9bDd4K4pI.JjpAP.unxUWAsS/XJHofTR/PdcEV8Bu', NULL),
-(2, 'Shafy Gunawan', '081234567891', 'shafy@example.com', '$2y$10$YpsuVarBbWQP9bDd4K4pI.JjpAP.unxUWAsS/XJHofTR/PdcEV8Bu', NULL);
+INSERT INTO `customers` (`customer_id`, `customer_name`, `customer_phone`, `customer_email`, `customer_password`) VALUES
+(1, 'Naufal Alifiansyah', '081234567891', 'naufal@example.com', '$2y$10$YpsuVarBbWQP9bDd4K4pI.JjpAP.unxUWAsS/XJHofTR/PdcEV8Bu'),
+(2, 'Shafy Gunawan', '081234567891', 'shafy@example.com', '$2y$10$YpsuVarBbWQP9bDd4K4pI.JjpAP.unxUWAsS/XJHofTR/PdcEV8Bu');
 
 -- --------------------------------------------------------
 
@@ -225,17 +224,16 @@ CREATE TABLE `staffs` (
   `staff_name` varchar(255) NOT NULL,
   `staff_phone` varchar(17) NOT NULL,
   `staff_email` varchar(255) NOT NULL,
-  `staff_password` varchar(255) NOT NULL,
-  `staff_photo` varchar(255) DEFAULT NULL
+  `staff_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `staffs`
 --
 
-INSERT INTO `staffs` (`staff_id`, `role_id`, `staff_name`, `staff_phone`, `staff_email`, `staff_password`, `staff_photo`) VALUES
-(1, 1, 'Andre Eka', '081234567891', 'andre@example.com', '$2y$10$YpsuVarBbWQP9bDd4K4pI.JjpAP.unxUWAsS/XJHofTR/PdcEV8Bu', NULL),
-(2, 2, 'Umar Muchtar', '081234567891', 'umar@example.com', '$2y$10$YpsuVarBbWQP9bDd4K4pI.JjpAP.unxUWAsS/XJHofTR/PdcEV8Bu', NULL);
+INSERT INTO `staffs` (`staff_id`, `role_id`, `staff_name`, `staff_phone`, `staff_email`, `staff_password`) VALUES
+(1, 1, 'Andre Eka', '081234567891', 'andre@example.com', '$2y$10$YpsuVarBbWQP9bDd4K4pI.JjpAP.unxUWAsS/XJHofTR/PdcEV8Bu'),
+(2, 2, 'Umar Muchtar', '081234567891', 'umar@example.com', '$2y$10$YpsuVarBbWQP9bDd4K4pI.JjpAP.unxUWAsS/XJHofTR/PdcEV8Bu');
 
 -- --------------------------------------------------------
 

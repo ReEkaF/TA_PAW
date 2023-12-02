@@ -28,7 +28,6 @@ if (isset($_POST['submit'])) {
         $_SESSION['role_name'] = $staff['role_name'];
         $_SESSION['staff_id'] = $staff['staff_id'];
         $_SESSION['staff_name'] = $staff['staff_name'];
-        $_SESSION['staff_photo'] = $staff['staff_photo'];
         header("Location: ./index.php");
         exit();
       }

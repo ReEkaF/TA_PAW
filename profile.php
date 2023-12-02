@@ -31,7 +31,7 @@ require('layouts/header.php');
     <div class="profile__body">
       <div class="profile__left">
         <!-- FOTO CUST -->
-        <img src="<?= $customer['customer_photo'] == null ? './assets/img/default-profile.jpg' : './assets/img/profiles/' . $customer['customer_photo'] ?>" alt="<?= $customer['customer_name'] ?>" />
+        <img src="./assets/img/default-profile.jpg" alt="<?= $customer['customer_name'] ?>" />
       </div>
       <div class="profile__right">
         <div class="profile__form">

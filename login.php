@@ -35,10 +35,9 @@ if (isset($_POST['submit'])) {
     if ($customer) {
       // CHECK PASSWORD CUST
       if (password_verify($_POST['password'], $customer['customer_password'])) {
-        // INSTANCE CUST_ID,CUST_EMAIL,CUST_PHOTO
+        // INSTANCE CUST_ID,CUST_EMAIL
         $_SESSION['customer_id'] = $customer['customer_id'];
         $_SESSION['customer_email'] = $customer['customer_email'];
-        $_SESSION['customer_photo'] = $customer['customer_photo'];
         header("Location: ./products.php");
         exit();
       }

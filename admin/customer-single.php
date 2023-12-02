@@ -47,7 +47,7 @@ require('layouts/header.php');
   <div class="admin__body">
     <div class="admin__card">
       <div class="page-single">
-        <img src="<?= $customer['customer_photo'] == null ? '../assets/img/default-profile.jpg' : '../assets/img/profiles/' . $customer['customer_photo'] ?>" alt="<?= $customer['customer_name'] ?>" class="page-single__img" />
+        <img src="../assets/img/default-profile.jpg" alt="<?= $customer['customer_name'] ?>" class="page-single__img" />
         <div>
           <label for="name" class="input-label">Nama</label>
           <input type="text" id="name" class="input" value="<?= $customer['customer_name'] ?>" readonly disabled />

@@ -55,7 +55,6 @@ create table customers
    customer_phone       varchar(17) not null,
    customer_email       varchar(255) not null,
    customer_password    varchar(255) not null,
-   customer_photo       varchar(255),
    primary key (customer_id)
 );
 
@@ -135,7 +134,6 @@ create table staffs
    staff_phone          varchar(17) not null,
    staff_email          varchar(255) not null,
    staff_password       varchar(255) not null,
-   staff_photo          varchar(255),
    primary key (staff_id)
 );
 

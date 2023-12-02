@@ -7,7 +7,7 @@
     <div class="topbar__right">
       <div class="topbar__profile">
         <label for="topbar__profile-toggler" class="topbar__profile-toggler">
-          <img src="<?= $_SESSION['staff_photo'] == null ? '../assets/img/default-profile.jpg' : '../assets/img/profiles/' . $_SESSION['staff_photo'] ?>" alt="<?= $_SESSION['staff_name'] ?>" class="topbar__profile-img" />
+          <img src="../assets/img/default-profile.jpg" alt="<?= $_SESSION['staff_name'] ?>" class="topbar__profile-img" />
           <span class="topbar__profile-name"><?= $_SESSION['staff_name'] ?></span>
           <i class="ph ph-caret-right topbar__profile-dropdown-img"></i>
         </label>
