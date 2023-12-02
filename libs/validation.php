@@ -60,10 +60,10 @@ function validate_phone(&$errors, $field_list, $field_name)
     return false;
   }
 
-  // cek apakah kolom mengandung karakter diluar angka dan panjang karakter bukan 10-13 karakter
+  // cek apakah kolom mengandung karakter diluar angka dan panjang digit bukan 10-13 digit
   $pattern =  "/^[\d]{10,13}$/"; // angka
   if (!preg_match($pattern, $field_list[$field_name])) {
-    $errors[$field_name] = 'Masukan harus berupa angka dengan 10-13 karakter!';
+    $errors[$field_name] = 'Masukan harus berupa angka dengan 10-13 digit!';
     return false;
   }
 
