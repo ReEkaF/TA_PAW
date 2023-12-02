@@ -2,16 +2,19 @@
 
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// cek apakah peran user bukan administrator
 if ($_SESSION['role_name'] != 'administrator') {
   header("Location: ./index.php");
   exit();
 }
 
+// cek apakah id pesanan tidak ada
 if (!isset($_GET['order_id'])) {
   header("Location: ./unpaid-transactions.php");
   exit();
@@ -24,11 +27,13 @@ $date_bank = get_date_bank($_GET["order_id"]);
 $result = 0;
 $result_qty = 0;
 
+// cek apakah pesanan tidak ditemukan
 if (!$date_bank) {
   header("Location: ./unpaid-transactions.php");
   exit();
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = 'unpaid-transactions';
 $title = 'Detail Transaksi Belum Lunas';
 require('layouts/header.php');
@@ -99,6 +104,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

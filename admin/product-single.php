@@ -2,16 +2,19 @@
 
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// cek apakah peran user bukan administrator
 if ($_SESSION['role_name'] != 'administrator') {
   header("Location: ./index.php");
   exit();
 }
 
+// cek apakah id tanaman tidak ada
 if (!isset($_GET['plant_id'])) {
   header("Location: ./products.php");
   exit();
@@ -27,11 +30,13 @@ $plant = find_plant($_GET['plant_id']);
 $categories = get_categories();
 $suppliers = get_suppliers();
 
+// cek apakah tanaman tidak ditemukan
 if (!$plant) {
   header("Location: ./products.php");
   exit();
 }
 
+// inisialisasi variabel untuk menyimpan error dan inputan user
 $errors = [];
 $old_inputs = [
   'supplier_id' => $plant['supplier_id'],
@@ -41,6 +46,7 @@ $old_inputs = [
   'stock' => $plant['plant_stock'],
 ];
 
+// cek apakah tombol submit ditekan
 if (isset($_POST['submit'])) {
   validate_num($errors, $_POST, 'supplier_id');
   validate_num($errors, $_POST, 'category_id');
@@ -48,9 +54,11 @@ if (isset($_POST['submit'])) {
   validate_num($errors, $_POST, 'price');
   validate_num($errors, $_POST, 'stock');
 
+  // cek apakah tidak ada error
   if (!$errors) {
     $filename = upload_file($_FILES, 'photo', 'plants');
 
+    // cek apakah foto berhasil diupload
     if ($filename) {
       $_POST['photo'] = $filename;
       delete_file($plant['plant_photo'], 'plants');
@@ -70,6 +78,7 @@ if (isset($_POST['submit'])) {
   $old_inputs['stock'] = htmlspecialchars($_POST['stock']);
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = 'products';
 $title = 'Detail Tanaman';
 require('layouts/header.php');
@@ -171,6 +180,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

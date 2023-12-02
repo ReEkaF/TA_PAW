@@ -2,6 +2,7 @@
 
 session_start();
 
+// cek apakah user sudah login
 if (isset($_SESSION['staff_id'])) {
   header("Location: ./index.php");
   exit();
@@ -10,6 +11,7 @@ if (isset($_SESSION['staff_id'])) {
 require_once('../data/staff.php');
 require_once('../libs/validation.php');
 
+// inisialisasi variabel untuk menyimpan error dan inputan user
 $errors = [];
 $old_inputs = [
   'name' => '',
@@ -18,6 +20,7 @@ $old_inputs = [
   'token' => '',
 ];
 
+// cek apakah tombol submit ditekan
 if (isset($_POST['submit'])) {
   validate_name($errors, $_POST, 'name');
   validate_phone($errors, $_POST, 'phone');
@@ -25,6 +28,7 @@ if (isset($_POST['submit'])) {
   validate_password($errors, $_POST, 'password');
   $role_id = validate_token($errors, $_POST, 'token');
 
+  // cek apakah tidak ada error dan token role valid
   if (!$errors && $role_id) {
     save_staff($_POST, $role_id);
     header('Location: ./login.php?success_message=Akun+berhasil+dibuat,+silahkan+login!');
@@ -37,6 +41,7 @@ if (isset($_POST['submit'])) {
   $old_inputs['token'] = htmlspecialchars($_POST['token']);
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $title = 'Registrasi Staff';
 require('layouts/header-two.php');
 
@@ -102,6 +107,7 @@ require('layouts/header-two.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer-two.php');
 
 ?>

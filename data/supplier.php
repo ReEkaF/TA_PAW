@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 require_once(__DIR__ . '/../config/database.php');
 
+// fungsi untuk mencari pemasok
 function find_supplier($id)
 {
   try {
@@ -20,6 +21,7 @@ function find_supplier($id)
   }
 }
 
+// fungsi untuk mendapatkan seluruh pemasok
 function get_suppliers()
 {
   try {
@@ -35,6 +37,7 @@ function get_suppliers()
   }
 }
 
+// fungsi untuk menyimpan pemasok
 function save_supplier($supplier)
 {
   try {
@@ -49,6 +52,7 @@ function save_supplier($supplier)
   }
 }
 
+// fungsi untuk memperbarui pemasok
 function update_supplier($id, $supplier)
 {
   try {
@@ -64,6 +68,7 @@ function update_supplier($id, $supplier)
   }
 }
 
+// fungsi untuk menghapus pemasok
 function delete_supplier($id)
 {
   try {

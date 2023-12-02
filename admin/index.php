@@ -2,11 +2,13 @@
 
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = "home";
 require('layouts/header.php');
 
@@ -23,6 +25,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

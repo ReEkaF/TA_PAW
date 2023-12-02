@@ -2,16 +2,19 @@
 
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// cek apakah peran user bukan administrator
 if ($_SESSION['role_name'] != 'administrator') {
   header("Location: ./index.php");
   exit();
 }
 
+// cek apakah email pelanggan tidak ada
 if (!isset($_GET['customer_email'])) {
   header("Location: ./customers.php");
   exit();
@@ -21,11 +24,13 @@ require_once('../data/customer.php');
 
 $customer = find_customer($_GET['customer_email']);
 
+// cek apakah pelanggan tidak ada
 if (!$customer) {
   header("Location: ./customers.php");
   exit();
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = 'customers';
 $title = 'Detail Pelanggan';
 require('layouts/header.php');
@@ -68,6 +73,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 require_once(__DIR__ . '/../config/database.php');
 
+// fungsi untuk mencari staff
 function find_staff($email)
 {
   try {
@@ -20,6 +21,7 @@ function find_staff($email)
   }
 }
 
+// fungsi untuk mencari staff yang dijoinkan dengan peran
 function find_staff_with_role($email)
 {
   try {
@@ -36,6 +38,7 @@ function find_staff_with_role($email)
   }
 }
 
+// fungsi untuk mendapatkan seluruh staff
 function get_staffs()
 {
   try {
@@ -51,6 +54,7 @@ function get_staffs()
   }
 }
 
+// fungsi untuk menyimpan staff
 function save_staff($staff, $role_id)
 {
   try {

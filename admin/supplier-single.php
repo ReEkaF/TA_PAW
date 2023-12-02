@@ -2,16 +2,19 @@
 
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// cek apakah peran user bukan administrator
 if ($_SESSION['role_name'] != 'administrator') {
   header("Location: ./index.php");
   exit();
 }
 
+// cek apakah id pemasok tidak ada
 if (!isset($_GET['supplier_id'])) {
   header("Location: ./suppliers.php");
   exit();
@@ -22,11 +25,13 @@ require_once('../libs/validation.php');
 
 $supplier = find_supplier($_GET['supplier_id']);
 
+// cek apakah pemasok tidak ditemukan
 if (!$supplier) {
   header("Location: ./suppliers.php");
   exit();
 }
 
+// inisialisasi variabel untuk menyimpan error dan inputan user
 $errors = [];
 $old_inputs = [
   'name' => $supplier['supplier_name'],
@@ -34,11 +39,13 @@ $old_inputs = [
   'address' => $supplier['supplier_address'],
 ];
 
+// cek apakah tombol submit ditekan
 if (isset($_POST['submit'])) {
   validate_name($errors, $_POST, 'name');
   validate_phone($errors, $_POST, 'phone');
   validate_address($errors, $_POST, 'address');
 
+  // cek apakah tidak ada error
   if (!$errors) {
     update_supplier($supplier['supplier_id'], $_POST);
     header('Location: ./suppliers.php');
@@ -50,6 +57,7 @@ if (isset($_POST['submit'])) {
   $old_inputs['address'] = htmlspecialchars($_POST['address']);
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = 'suppliers';
 $title = 'Detail Pemasok';
 require('layouts/header.php');
@@ -115,6 +123,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

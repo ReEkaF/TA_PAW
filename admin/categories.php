@@ -2,11 +2,13 @@
 
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// cek apakah peran user bukan administrator
 if ($_SESSION['role_name'] != 'administrator') {
   header("Location: ./index.php");
   exit();
@@ -15,8 +17,10 @@ if ($_SESSION['role_name'] != 'administrator') {
 require_once('../data/category.php');
 require_once('../data/plant.php');
 
+// mengambil seluruh kategori
 $categories = get_categories();
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = 'categories';
 $title = 'Kategori';
 require('layouts/header.php');
@@ -60,6 +64,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

@@ -3,11 +3,13 @@
 error_reporting(E_ALL);
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// cek apakah peran user bukan manager
 if ($_SESSION['role_name'] != 'manager') {
   header("Location: ./index.php");
   exit();
@@ -22,6 +24,7 @@ try {
   die("Database connection failed: " . $e->getMessage());
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = 'paid-transactions';
 $title = 'Transaksi Lunas';
 require('layouts/header.php');
@@ -209,6 +212,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

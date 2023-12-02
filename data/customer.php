@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 require_once(__DIR__ . '/../config/database.php');
 
+// fungsi untuk mencari pelanggan
 function find_customer($email)
 {
   try {
@@ -20,6 +21,7 @@ function find_customer($email)
   }
 }
 
+// fungsi untuk mencari pelanggan berdasarkan id
 function find_customer_with_id($id)
 {
   try {
@@ -36,6 +38,7 @@ function find_customer_with_id($id)
   }
 }
 
+// fungsi untuk mendapatkan seluruh pelanggan
 function get_customers()
 {
   try {
@@ -51,6 +54,7 @@ function get_customers()
   }
 }
 
+// fungsi untuk mendapatkan email pelanggan
 function get_email_customer($id)
 {
   try {
@@ -67,6 +71,7 @@ function get_email_customer($id)
   }
 }
 
+// fungsi untuk menyimpan pelanggan
 function save_customer($customer)
 {
   try {

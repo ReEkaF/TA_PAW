@@ -6,6 +6,7 @@ require_once(__DIR__ . '/../config/database.php');
 require_once(__DIR__ . '/cart-item.php');
 require_once(__DIR__ . '/order-detail.php');
 
+// fungsi untuk mendapatkan seluruh pesanan
 function get_orders($customer_id)
 {
   try {
@@ -22,6 +23,7 @@ function get_orders($customer_id)
   }
 }
 
+// fungsi untuk mencari pesanan
 function find_order($customer_id, $id)
 {
   try {
@@ -39,6 +41,7 @@ function find_order($customer_id, $id)
   }
 }
 
+// fungsi untuk mencari pesanan yang dijoinkan dengan metode pembayaran
 function find_order_with_payment_method($customer_id, $id)
 {
   try {
@@ -56,6 +59,7 @@ function find_order_with_payment_method($customer_id, $id)
   }
 }
 
+// fungsi untuk menyimpan pesanan
 function save_order($customer_id, $payment_method_id)
 {
   try {
@@ -86,6 +90,7 @@ function save_order($customer_id, $payment_method_id)
   }
 }
 
+// fungsi untuk memperbarui pesanan
 function update_order($customer_id, $id, $payment_method_id)
 {
   try {

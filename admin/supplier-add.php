@@ -2,11 +2,13 @@
 
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// cek apakah peran user bukan administrator
 if ($_SESSION['role_name'] != 'administrator') {
   header("Location: ./index.php");
   exit();
@@ -15,6 +17,7 @@ if ($_SESSION['role_name'] != 'administrator') {
 require_once('../data/supplier.php');
 require_once('../libs/validation.php');
 
+// inisialisasi variabel untuk menyimpan error dan inputan user
 $errors = [];
 $old_inputs = [
   'name' => '',
@@ -22,11 +25,13 @@ $old_inputs = [
   'address' => '',
 ];
 
+// cek apakah tombol submit ditekan
 if (isset($_POST['submit'])) {
   validate_name($errors, $_POST, 'name');
   validate_phone($errors, $_POST, 'phone');
   validate_address($errors, $_POST, 'address');
 
+  // cek apakah tidak ada error
   if (!$errors) {
     save_supplier($_POST);
     header('Location: ./suppliers.php');
@@ -38,6 +43,7 @@ if (isset($_POST['submit'])) {
   $old_inputs['address'] = htmlspecialchars($_POST['address']);
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = 'suppliers';
 $title = 'Tambah Pemasok';
 require('layouts/header.php');
@@ -100,6 +106,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

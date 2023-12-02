@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 require_once(__DIR__ . '/../config/database.php');
 
+// fungsi untuk mencari kategori
 function find_category($id)
 {
   try {
@@ -20,6 +21,7 @@ function find_category($id)
   }
 }
 
+// fungsi untuk mendapatkan seluruh kategori
 function get_categories()
 {
   try {
@@ -35,6 +37,7 @@ function get_categories()
   }
 }
 
+// fungsi untuk menyimpan kategori
 function save_category($category)
 {
   try {
@@ -47,6 +50,7 @@ function save_category($category)
   }
 }
 
+// fungsi untuk memperbarui kategori
 function update_category($id, $category)
 {
   try {
@@ -60,6 +64,7 @@ function update_category($id, $category)
   }
 }
 
+// fungsi untuk menghapus kategori
 function delete_category($id)
 {
   try {

@@ -2,11 +2,13 @@
 
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// cek apakah peran user bukan administrator
 if ($_SESSION['role_name'] != 'administrator') {
   header("Location: ./index.php");
   exit();
@@ -18,6 +20,7 @@ require_once('../data/supplier.php');
 require_once('../libs/validation.php');
 require_once('../libs/file.php');
 
+// inisialisasi variabel untuk menyimpan error dan inputan user
 $errors = [];
 $old_inputs = [
   'supplier_id' => '',
@@ -27,6 +30,7 @@ $old_inputs = [
   'stock' => '',
 ];
 
+// cek apakah tombol submit ditekan
 if (isset($_POST['submit'])) {
   validate_num($errors, $_POST, 'supplier_id');
   validate_num($errors, $_POST, 'category_id');
@@ -35,10 +39,12 @@ if (isset($_POST['submit'])) {
   validate_num($errors, $_POST, 'stock');
   $filename = upload_file($_FILES, 'photo', 'plants');
 
+  // cek apakah foto tidak diisi
   if (!$filename) {
     $errors['photo'] = 'Foto tanaman wajib diisi.';
   }
 
+  // cek apakah tidak ada error
   if (!$errors) {
     $_POST['photo'] = $filename;
     save_plant($_POST);
@@ -46,6 +52,7 @@ if (isset($_POST['submit'])) {
     exit();
   }
 
+  // cek apakah foto diisi
   if ($filename) {
     delete_file($filename, 'plants');
   }
@@ -60,6 +67,7 @@ if (isset($_POST['submit'])) {
 $categories = get_categories();
 $suppliers = get_suppliers();
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = 'products';
 $title = 'Tambah Tanaman';
 require('layouts/header.php');
@@ -157,6 +165,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

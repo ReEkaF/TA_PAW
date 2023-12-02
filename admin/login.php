@@ -2,6 +2,7 @@
 
 session_start();
 
+// cek apakah user sudah login
 if (isset($_SESSION['staff_id'])) {
   header("Location: ./index.php");
   exit();
@@ -10,24 +11,30 @@ if (isset($_SESSION['staff_id'])) {
 require_once('../data/staff.php');
 require_once('../libs/validation.php');
 
+// inisialisasi variabel untuk menyimpan error dan inputan user
 $login_error = null;
 $errors = [];
 $old_inputs = [
   'email' => '',
 ];
 
+// cek apakah tombol submit ditekan
 if (isset($_POST['submit'])) {
   validate_email($errors, $_POST, 'email');
   validate_password($errors, $_POST, 'password');
 
+  // cek apakah tidak ada error
   if (!$errors) {
     $staff = find_staff_with_role($_POST['email']);
 
+    // cek apakah staff ditemukan
     if ($staff) {
+      // cek apakah password benar
       if (password_verify($_POST['password'], $staff['staff_password'])) {
         $_SESSION['role_name'] = $staff['role_name'];
         $_SESSION['staff_id'] = $staff['staff_id'];
         $_SESSION['staff_name'] = $staff['staff_name'];
+
         header("Location: ./index.php");
         exit();
       }
@@ -39,6 +46,7 @@ if (isset($_POST['submit'])) {
   $old_inputs['email'] = htmlspecialchars($_POST['email']);
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $title = 'Login Staff';
 require('layouts/header-two.php');
 
@@ -91,6 +99,7 @@ require('layouts/header-two.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer-two.php');
 
 ?>

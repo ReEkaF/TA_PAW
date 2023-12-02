@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 require_once(__DIR__ . '/../config/database.php');
 
+// fungsi untuk mendapatkan seluruh metode pembayaran yang dijoinkan dengan pesanan yang belum lunas
 function get_data_order()
 {
   try {
@@ -20,6 +21,7 @@ function get_data_order()
   }
 }
 
+// fungsi untuk mendapatkan total kuantitas dari detail pesanan
 function get_order_sum($data)
 {
   try {
@@ -40,6 +42,7 @@ function get_order_sum($data)
   }
 }
 
+// fungsi untuk memperbarui status pesanan menjadi 'paid'
 function approve_order($data)
 {
   try {
@@ -52,6 +55,7 @@ function approve_order($data)
   }
 }
 
+// fungsi untuk mendapatkan seluruh detail pesanan berdasarkan id pesanan
 function find_order_admin($id)
 {
   try {
@@ -68,6 +72,7 @@ function find_order_admin($id)
   }
 }
 
+// fungsi untuk mendapatkan detail pesanan yang dijoinkan dengan tanaman
 function get_order_details_admin($id)
 {
   try {
@@ -84,6 +89,7 @@ function get_order_details_admin($id)
   }
 }
 
+// fungsi untuk mendapatkan pesanan belum lunas yang dijoinkan dengan metode pembayaran
 function get_date_bank($id)
 {
   try {

@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 require_once(__DIR__ . '/../config/database.php');
 require_once(__DIR__ . '/cart-item.php');
 
+// fungsi untuk mendapatkan seluruh detail pesanan yang dijoinkan dengan tanaman dan kategori
 function get_order_details_with_plant_with_category($order_id)
 {
   try {
@@ -21,6 +22,7 @@ function get_order_details_with_plant_with_category($order_id)
   }
 }
 
+// fungsi untuk menyimpan detail pesanan
 function save_order_detail($order_id, $plant_id, $order_detail)
 {
   try {

@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 require_once(__DIR__ . '/../config/database.php');
 
+// fungsi untuk mendapatkan seluruh metode pembayaran
 function get_payment_methods()
 {
   try {

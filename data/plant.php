@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 require_once(__DIR__ . '/../config/database.php');
 
+// fungsi untuk mencari tanaman
 function find_plant($id)
 {
   try {
@@ -20,6 +21,7 @@ function find_plant($id)
   }
 }
 
+// fungsi untuk mencari seluruh tanaman yang dijoinkan dengan kategori
 function search_plants_with_category($keyword = '', $category_id = '', $only_available = false)
 {
   try {
@@ -49,6 +51,7 @@ function search_plants_with_category($keyword = '', $category_id = '', $only_ava
   }
 }
 
+// fungsi untuk mendapatkan seluruh tanaman yang dijoinkan dengan kategori
 function get_plants_with_category()
 {
   try {
@@ -64,6 +67,7 @@ function get_plants_with_category()
   }
 }
 
+// fungsi untuk menyimpan tanaman
 function save_plant($plant)
 {
   try {
@@ -81,6 +85,7 @@ function save_plant($plant)
   }
 }
 
+// fungsi untuk memperbarui tanaman
 function update_plant($id, $plant)
 {
   try {
@@ -99,6 +104,7 @@ function update_plant($id, $plant)
   }
 }
 
+// fungsi untuk menghapus tanaman
 function delete_plant($id)
 {
   try {
@@ -111,6 +117,7 @@ function delete_plant($id)
   }
 }
 
+// fungsi untuk mendapatkan total tanaman berdasarkan kategori
 function count_related_plants_based_on_category($category_id)
 {
   try {

@@ -2,16 +2,19 @@
 
 session_start();
 
+// cek apakah user belum login
 if (!isset($_SESSION['staff_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
+// cek apakah peran user bukan administrator
 if ($_SESSION['role_name'] != 'administrator') {
   header("Location: ./index.php");
   exit();
 }
 
+// cek apakah id kategori tidak ada
 if (!isset($_GET['category_id'])) {
   header("Location: ./categories.php");
   exit();
@@ -22,19 +25,23 @@ require_once('../libs/validation.php');
 
 $category = find_category($_GET['category_id']);
 
+// cek apakah kategori tidak ada
 if (!$category) {
   header("Location: ./categories.php");
   exit();
 }
 
+// inisialisasi variabel untuk menyimpan error dan inputan user
 $errors = [];
 $old_inputs = [
   'name' => $category['category_name'],
 ];
 
+// cek apakah tombol submit ditekan
 if (isset($_POST['submit'])) {
   validate_name($errors, $_POST, 'name');
 
+  // cek apakah tidak ada error
   if (!$errors) {
     update_category($category['category_id'], $_POST);
     header('Location: ./categories.php');
@@ -44,6 +51,7 @@ if (isset($_POST['submit'])) {
   $old_inputs['name'] = htmlspecialchars($_POST['name']);
 }
 
+// inisialisasi variabel untuk halaman dan komponen header
 $page = 'categories';
 $title = 'Detail Kategori';
 require('layouts/header.php');
@@ -91,6 +99,7 @@ require('layouts/header.php');
 
 <?php
 
+// komponen footer
 require('layouts/footer.php');
 
 ?>

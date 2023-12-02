@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 require_once(__DIR__ . '/../config/database.php');
 
+// fungsi untuk mendapatkan seluruh item keranjang yang dijoinkan dengan tanaman
 function get_cart_items_with_plant($customer_id)
 {
   try {
@@ -20,6 +21,7 @@ function get_cart_items_with_plant($customer_id)
   }
 }
 
+// fungsi untuk mendapatkan seluruh item keranjang yang dijoinkan dengan tanaman dan kategori
 function get_cart_items_with_plant_with_category($customer_id)
 {
   try {
@@ -36,6 +38,7 @@ function get_cart_items_with_plant_with_category($customer_id)
   }
 }
 
+// fungsi untuk mencari item keranjang
 function find_cart_item($customer_id, $plant_id)
 {
   try {
@@ -53,6 +56,7 @@ function find_cart_item($customer_id, $plant_id)
   }
 }
 
+// fungsi untuk menyimpan item ke keranjang
 function save_cart_item($customer_id, $plant_id)
 {
   try {
@@ -66,6 +70,7 @@ function save_cart_item($customer_id, $plant_id)
   }
 }
 
+// fungsi untuk memperbarui item keranjang
 function update_cart_item($customer_id, $plant_id, $qty)
 {
   try {
@@ -80,6 +85,7 @@ function update_cart_item($customer_id, $plant_id, $qty)
   }
 }
 
+// fungsi untuk menghapus item keranjang
 function delete_cart_item($customer_id, $plant_id)
 {
   try {
@@ -93,6 +99,7 @@ function delete_cart_item($customer_id, $plant_id)
   }
 }
 
+// fungsi untuk menghapus seluruh item keranjang
 function delete_all_cart_items($customer_id)
 {
   try {

@@ -1,5 +1,6 @@
 <?php
 
+// fungsi upload file
 function upload_file($field_list, $field_name, $folder_name)
 {
   // ambil data file
@@ -25,6 +26,7 @@ function upload_file($field_list, $field_name, $folder_name)
   return $new_filename;
 }
 
+// fungsi hapus file
 function delete_file($filename, $folder_name)
 {
   $file_path = __DIR__ . '/../assets/img/' . $folder_name . '/' . $filename;

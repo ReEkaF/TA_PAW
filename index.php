@@ -89,14 +89,14 @@ require('layouts/header.php');
       <p class="join__description">
         Kelola sekarang dan jadilah penggerak dalam menyebarkan kebaikan tanaman!
       </p>
-      <a href="./login.php" class="join__button">Mulai sebagai staff</a>
+      <a href="./admin/login.php" class="join__button">Mulai sebagai staff</a>
     </div>
     <div class="join__card">
       <h2 class="join__title">Beli tanaman sekarang</h2>
       <p class="join__description">
         Mulai petualangan hijau Anda sekarang - pilih, tambahkan ke keranjang, dan bawa keindahan tanaman!
       </p>
-      <a href="./admin/login.php" class="join__button join__button_primary">Mulai sebagai customer</a>
+      <a href="./login.php" class="join__button join__button_primary">Mulai sebagai pelanggan</a>
     </div>
   </div>
   <!-- end join -->
