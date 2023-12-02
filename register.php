@@ -34,9 +34,9 @@ if (isset($_POST['submit'])) {
     exit();
   }
   // ISI OLD INPUT DENGAN INPUTAN USER
-  $old_inputs['name'] = $_POST['name'];
-  $old_inputs['phone'] = $_POST['phone'];
-  $old_inputs['email'] = $_POST['email'];
+  $old_inputs['name'] = htmlspecialchars($_POST['name']);
+  $old_inputs['phone'] = htmlspecialchars($_POST['phone']);
+  $old_inputs['email'] = htmlspecialchars($_POST['email']);
 }
 // HEADER
 $title = 'Registrasi';
