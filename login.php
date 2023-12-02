@@ -19,15 +19,18 @@ $errors = [];
 $old_inputs = [
   'email' => '',
 ];
+
 // JIKA TOMBOL MASUK (LOGIN) DIKLIK
 if (isset($_POST['submit'])) {
   // DI VALIDASI
   validate_email($errors, $_POST, 'email');
   validate_password($errors, $_POST, 'password');
+
   // JIKA TIDAK TERDAPAT ERROR VALIDASI 
   if (!$errors) {
     // MENCARI DATA CUST 
     $customer = find_customer($_POST['email']);
+
     // JIKA DITEMUKAN
     if ($customer) {
       // CHECK PASSWORD CUST
@@ -40,12 +43,15 @@ if (isset($_POST['submit'])) {
         exit();
       }
     }
+
     // JIKA TIDAK DITEMUKAN
     $login_error = 'Email atau password salah!';
   }
+
   // SIMPAN INPUTAN USER
-  $old_inputs['email'] = $_POST['email'];
+  $old_inputs['email'] = htmlspecialchars($_POST['email']);
 }
+
 // HEADER
 $title = 'Login';
 require('layouts/header.php');
@@ -94,10 +100,8 @@ require('layouts/header.php');
       </div>
       <!-- TOMBOL MASUK -->
       <button type="submit" name="submit" class="login__button">Masuk</button>
-
       <!-- LINK REGISTER CUST -->
       <p>Belum punya akun? <a href="./register.php">Daftar</a></p>
-      
       <!-- LINK LOGIN STAFF -->
       <p>
         <a href="./admin/login.php">Login Staff</a>
@@ -112,6 +116,7 @@ require('layouts/header.php');
 <!-- end content -->
 
 <?php
+
 // FOOTER
 require('layouts/footer.php');
 

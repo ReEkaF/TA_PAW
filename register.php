@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 // cek apakah cust sudah login
 if (isset($_SESSION['customer_id'])) {
   header("Location: ./products.php");
@@ -18,6 +19,7 @@ $old_inputs = [
   'phone' => '',
   'email' => '',
 ];
+
 // JIKA TOMBOL DAFTAR (SUBMIT) DIKLIK
 if (isset($_POST['submit'])) {
   // DI VALIDASI
@@ -25,6 +27,7 @@ if (isset($_POST['submit'])) {
   validate_phone($errors, $_POST, 'phone');
   validate_email_customer($errors, $_POST, 'email');
   validate_password($errors, $_POST, 'password');
+
   // JIKA TIDAK ADA YANG ERROR
   if (!$errors) {
     // SIMPAN / BUAT DATA CUST BERDASAR INPUTAN
@@ -33,11 +36,13 @@ if (isset($_POST['submit'])) {
     header('Location: ./login.php?success_message=Akun+berhasil+dibuat,+silahkan+login!');
     exit();
   }
+
   // ISI OLD INPUT DENGAN INPUTAN USER
   $old_inputs['name'] = htmlspecialchars($_POST['name']);
   $old_inputs['phone'] = htmlspecialchars($_POST['phone']);
   $old_inputs['email'] = htmlspecialchars($_POST['email']);
 }
+
 // HEADER
 $title = 'Registrasi';
 require('layouts/header.php');
@@ -109,6 +114,7 @@ require('layouts/header.php');
 <!-- end content -->
 
 <?php
+
 // FOOTER
 require('layouts/footer.php');
 

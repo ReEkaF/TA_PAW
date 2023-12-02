@@ -1,11 +1,13 @@
 <?php
 
 session_start();
-  // cek apakah cust sudah login
+
+// cek apakah cust sudah login
 if (!isset($_SESSION['customer_id'])) {
   header("Location: ./login.php");
   exit();
 }
+
 // JIKA TIDAK ADA ORDER_ID YANG DIPILIH
 if (!isset($_GET['order_id'])) {
   header("Location: ./transactions.php");
@@ -23,6 +25,7 @@ if (!$order) {
   header("Location: ./transactions.php");
   exit();
 }
+
 // AMBIL DETAIL ORDERAN (1 ORDER)
 $order_details = get_order_details_with_plant_with_category($order['order_id']);
 
@@ -48,7 +51,6 @@ require('layouts/header.php');
     </div>
     <div class="transaction-single__body">
       <div class="transaction-single__list">
-        <!-- INSTANCE TOTAL -->
         <?php $total = 0; ?>
         <!-- TAMPILKAN DATA ORDERAN -->
         <?php foreach ($order_details as $order_detail) : ?>
@@ -137,6 +139,7 @@ require('layouts/header.php');
 <!-- end content -->
 
 <?php
+
 // FOOTER
 require('layouts/footer.php');
 

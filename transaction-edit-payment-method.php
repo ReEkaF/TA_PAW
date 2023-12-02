@@ -1,11 +1,13 @@
 <?php
 
 session_start();
-  // cek apakah cust sudah login
+
+// cek apakah cust sudah login
 if (!isset($_SESSION['customer_id'])) {
   header("Location: ./login.php");
   exit();
 }
+
 // JIKA TIDAK ADA ORDER YANG DIUBAH PEMBAYARANNYA ARAHKAN KE HAL ORDER
 if (!isset($_GET['order_id'])) {
   header("Location: ./transactions.php");
@@ -27,11 +29,13 @@ if (!$order) {
   header("Location: ./transactions.php");
   exit();
 }
+
 // JIKA STATUS ORDERAN TELAH TERBAYAR
 if ($order['order_status'] == 'paid') {
   header("Location: ./transaction-single.php?order_id=" . $_GET['order_id']);
   exit();
 }
+
 // JIKA TOMBOL SIMPAN (SUBMIT) DIKLIK
 if (isset($_POST['submit'])) {
   // JIKA METHODE PEMBAYARAN DIPILIH
@@ -41,6 +45,7 @@ if (isset($_POST['submit'])) {
     header("Location: ./transaction-single.php?order_id=" . $_GET['order_id']);
     exit();
   }
+
   // ISI ERROR MSG
   $errors['payment_method_id'] = 'Pilih satu metode pembayaran.';
 }
@@ -64,10 +69,8 @@ require('layouts/header.php');
         <i class="ph-bold ph-arrow-left"></i>
         <a href="./transaction-single.php?order_id=<?= $_GET['order_id'] ?>">Kembali</a>
       </p>
-      <!-- H1 -->
       <h1>Ubah Metode Pembayaran #FF<?= $order['order_id'] ?></h1>
     </div>
-    <!-- FORM -->
     <form action="./transaction-edit-payment-method.php?order_id=<?= $_GET['order_id'] ?>" method="post" class="transaction-edit-method__body">
       <div class="transaction-edit-method__method">
         <div class="transaction-edit-method__method-group">
@@ -77,8 +80,9 @@ require('layouts/header.php');
           <div class="transaction-edit-method__method-list">
             <!-- TAMPILKAN SEMUA METHODE PEMBAYARAN -->
             <?php foreach ($payment_methods as $payment_method) : ?>
-              <label class="<?= $payment_method['payment_method_id'] == $order['payment_method_id'] ? 'active' : '' ?>">
+              <label>
                 <input type="radio" name="payment_method_id" value="<?= $payment_method['payment_method_id'] ?>" <?= $payment_method['payment_method_id'] == $order['payment_method_id'] ? 'checked' : '' ?> />
+                <span></span>
                 <i class="ph-fill ph-check-circle"></i>
                 <img src="./assets/img/banks/<?= $payment_method['payment_method_logo'] ?>" alt="<?= $payment_method['payment_method_bank'] ?>" />
               </label>
@@ -99,9 +103,6 @@ require('layouts/header.php');
   <!-- end transaction edit payment method -->
 </main>
 <!-- end content -->
-
-<!-- js customs -->
-<script src="./assets/js/transaction-edit-payment-method.js"></script>
 
 <?php
 

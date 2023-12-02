@@ -7,6 +7,7 @@ if (!isset($_SESSION['customer_id'])) {
   header("Location: ./login.php");
   exit();
 }
+
 // JIKA TIDAK TERDETEKSI PRODUK YANG AKAN DIHAPUS
 if (!isset($_POST['plant_id'])) {
   header("Location: ./products.php");
@@ -14,6 +15,7 @@ if (!isset($_POST['plant_id'])) {
 }
 
 require_once('data/cart-item.php');
+
 // ID CUST, ID PRODUK
 $customer_id = $_SESSION['customer_id'];
 $plant_id = $_POST['plant_id'];

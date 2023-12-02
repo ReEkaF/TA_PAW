@@ -1,13 +1,15 @@
 <?php
 
 session_start();
-  // cek apakah cust sudah login
+
+// cek apakah cust sudah login
 if (!isset($_SESSION['customer_id'])) {
   header("Location: ./login.php");
   exit();
 }
 
 require_once('data/order.php');
+
 // AMBIL SELURUH ORDERAN CUST X
 $orders = get_orders($_SESSION['customer_id']);
 
@@ -29,7 +31,6 @@ require('layouts/header.php');
     </div>
     <div class="transactions__body">
       <table class="transactions__table">
-        <!-- JUDUL -->
         <thead>
           <tr>
             <th>No. Transaksi</th>
@@ -67,6 +68,7 @@ require('layouts/header.php');
 <!-- end content -->
 
 <?php
+
 // FOOTER
 require('layouts/footer.php');
 

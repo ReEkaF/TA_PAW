@@ -12,7 +12,7 @@ require_once('data/plant.php');
 require_once('data/category.php');
 
 // KATA KUNCI
-$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+$keyword = htmlspecialchars(isset($_GET['keyword']) ? $_GET['keyword'] : '');
 // KATEGORI
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
 
@@ -30,14 +30,6 @@ require('layouts/header.php');
 <main>
   <!-- filter -->
   <form action="./products.php" method="get" class="filter container">
-    <div class="filter__search">
-      <label for="keyword">
-        <i class="ph ph-magnifying-glass"></i>
-      </label>
-      <!-- INPUT KATA KUNCI -->
-      <input type="search" name="keyword" id="keyword" placeholder="Cari tanaman ..." value="<?= $keyword ?>" />
-      <button type="submit">Cari</button>
-    </div>
     <div class="filter__list">
       <div class="filter__item">
         <label for="category_id">
@@ -51,6 +43,14 @@ require('layouts/header.php');
           <?php endforeach; ?>
         </select>
       </div>
+    </div>
+    <div class="filter__search">
+      <label for="keyword">
+        <i class="ph ph-magnifying-glass"></i>
+      </label>
+      <!-- INPUT KATA KUNCI -->
+      <input type="search" name="keyword" id="keyword" placeholder="Cari tanaman ..." value="<?= $keyword ?>" />
+      <button type="submit">Cari</button>
     </div>
   </form>
   <!-- end filter -->
@@ -105,9 +105,6 @@ require('layouts/header.php');
   <!-- end products -->
 </main>
 <!-- end content -->
-
-<!-- js customs -->
-<script src="./assets/js/filter.js"></script>
 
 <?php
 

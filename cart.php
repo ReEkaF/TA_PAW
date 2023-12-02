@@ -14,10 +14,8 @@ require_once('data/cart-item.php');
 // ambil isi keranjang cust
 $cart_items = get_cart_items_with_plant_with_category($_SESSION['customer_id']);
 
-
-$title = 'Keranjang';
-
 // HEADER
+$title = 'Keranjang';
 require('layouts/header.php');
 
 ?>
@@ -28,17 +26,13 @@ require('layouts/header.php');
 <!-- content -->
 <main>
   <!-- cart -->
-  <!-- TULISAN KERANJANG -->
   <div class="cart container">
     <div class="section-header">
       <h2>Keranjang</h2>
     </div>
-
     <div class="cart__body">
       <div class="cart__list">
-        <!--  instance TOTAL -->
         <?php $total = 0; ?>
-
         <!-- TAMPILKAN ISI KERANJANG JIKA ADA PRODUKNYA -->
         <?php foreach ($cart_items as $cart_item) : ?>
           <?php
@@ -51,12 +45,10 @@ require('layouts/header.php');
             <div class="cart__item-left">
               <!-- GAMBAR PRODUK -->
               <img src="./assets/img/plants/<?= $cart_item['plant_photo'] ?>" alt="<?= $cart_item['plant_name'] ?>" />
-
               <div class="cart__item-left-text">
                 <!-- NAMA, KATEGORI  -->
-                <h2><?= $cart_item['plant_name'] ?></h2> 
+                <h2><?= $cart_item['plant_name'] ?></h2>
                 <p><?= $cart_item['category_name'] ?></p>
-
                 <!-- TOMBOL TAMBAH, KURANG -->
                 <form action="./update-cart-item.php" method="post" class="cart__actions">
                   <input type="hidden" name="plant_id" value="<?= $cart_item['plant_id'] ?>">
@@ -85,7 +77,6 @@ require('layouts/header.php');
           <!-- end cart item -->
           <hr />
         <?php endforeach; ?>
-
         <!-- TAMBILKAN TOTAL BELANJA JIKA ADA BARANGNYA -->
         <?php if (!empty($cart_items)) : ?>
           <!-- cart item -->
@@ -98,7 +89,7 @@ require('layouts/header.php');
             </div>
           </div>
           <!-- end cart item -->
-        <!-- TAMPILKAN PESAN JIKA KERANJANG MASIH KOSONG -->
+          <!-- TAMPILKAN PESAN JIKA KERANJANG MASIH KOSONG -->
         <?php else : ?>
           <!-- cart item -->
           <div class="cart__item">
@@ -120,6 +111,7 @@ require('layouts/header.php');
 <!-- end content -->
 
 <?php
+
 // FOOTER
 require('layouts/footer.php');
 

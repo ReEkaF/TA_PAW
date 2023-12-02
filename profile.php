@@ -1,25 +1,25 @@
-<link rel="stylesheet" href="./assets/css/profile.css">
 <?php
 
-  session_start();
+session_start();
 
-  // cek apakah cust sudah login
-  if (!isset($_SESSION['customer_id'])) {
-    header("Location: ./login.php");
-    exit();
-  }
-  require_once('data/customer.php');
-  // AMBIL DATA CUST
-  $customer = find_customer_with_id($_SESSION['customer_id']);
+// cek apakah cust sudah login
+if (!isset($_SESSION['customer_id'])) {
+  header("Location: ./login.php");
+  exit();
+}
 
-  $title = 'Profil';
-  require('layouts/header.php');
+require_once('data/customer.php');
 
+// AMBIL DATA CUST
+$customer = find_customer_with_id($_SESSION['customer_id']);
+
+$title = 'Profil Saya';
+require('layouts/header.php');
 
 ?>
 
 <!-- css customs -->
-
+<link rel="stylesheet" href="./assets/css/profile.css">
 
 <!-- content -->
 <main>
@@ -32,31 +32,30 @@
       <div class="profile__left">
         <!-- FOTO CUST -->
         <img src="<?= $customer['customer_photo'] == null ? './assets/img/default-profile.jpg' : './assets/img/profiles/' . $customer['customer_photo'] ?>" alt="<?= $customer['customer_name'] ?>" />
-
       </div>
+      <div class="profile__right">
         <div class="profile__form">
           <div>
             <!-- NAMA  -->
-            <a class="input-label">Nama</a>
-            <a class="input" ><?= $customer['customer_name'] ?></a>
+            <div class="input-label">Nama:</div>
+            <div class="input-label"><?= $customer['customer_name'] ?></div>
           </div>
           <div>
             <!-- EMAIL -->
-            <a class="input-label">Email</a>
-            <a class="input"><?= $customer['customer_email'] ?></a>
+            <div class="input-label">Email:</div>
+            <div class="input-label"><?= $customer['customer_email'] ?></div>
           </div>
           <div>
             <!-- NO TELEPHONE -->
-            <a class="input-label">Telepon</a>
-            <a class="input" ><?= $customer['customer_phone'] ?></a>
+            <div class="input-label">Telepon:</div>
+            <div class="input-label"><?= $customer['customer_phone'] ?></div>
           </div>
           <!-- TOMBOL UBAH DATA (ubahprofil) -->
-          <form method="POST" action="editprofile.php">
-            <div>
-            <input type="submit" name="ubahprofil" value="UBAH DATA" class="profile__button">
-            </div>
+          <form action="./editprofile.php" method="get">
+            <button type="submit" class="profile__button">Ubah Data</button>
           </form>
         </div>
+      </div>
     </div>
   </div>
   <!-- end profile -->
@@ -64,6 +63,7 @@
 <!-- end content -->
 
 <?php
+
 // FOOTER
 require('layouts/footer.php');
 

@@ -1,4 +1,5 @@
 <?php
+
 // mulai sesi
 session_start();
 
@@ -24,12 +25,10 @@ $plant_id = $_POST['plant_id'];
 // cek apakah tumbuhan tersebut sudah pernah ada di keranjang
 $cart_item = find_cart_item($customer_id, $plant_id);
 
-// jika tumbuhan tersebut belum pernah ditambahkan maka masukkan ke keranjang
+// jika tumbuhan tersebut belum pernah ditambahkan maka masukkan ke keranjang. jika sudah pernah ditambahkan ke keranjang maka update nilainya + x
 if (!$cart_item) {
   save_cart_item($customer_id, $plant_id);
-} 
-// jika sudah pernah ditambahkan ke keranjang maka update nilainya + x
-else {
+} else {
   update_cart_item($customer_id, $plant_id, $cart_item['cart_item_qty'] + 1);
 }
 

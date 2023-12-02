@@ -24,6 +24,7 @@ if (empty($cart_items)) {
   header("Location: ./cart.php");
   exit();
 }
+
 // jika di klik PESAN (submit) maka CO dimasukkan ke orderan
 if (isset($_POST['submit'])) {
   // jika methode pembayaran diisi
@@ -32,6 +33,7 @@ if (isset($_POST['submit'])) {
     header("Location: ./transactions.php");
     exit();
   }
+
   // jika tidak memilih methode pembayaran
   $errors['payment_method_id'] = 'Pilih salah satu metode pembayaran.';
 }
@@ -57,7 +59,6 @@ require('layouts/header.php');
     </div>
     <div class="checkout__body">
       <div class="checkout__list">
-        <!-- instance TOTAL -->
         <?php $total = 0; ?>
         <!-- MENAMPILKAN SELURUH BARANG DIKERANJANG -->
         <?php foreach ($cart_items as $cart_item) : ?>
@@ -91,18 +92,18 @@ require('layouts/header.php');
               </div>
             </div>
             <!-- SUBTOTAL -->
-            <div class="checkout__item-right">
-              <a href="#">
+            <form action="./delete-cart-item.php" method="post" class="checkout__item-right">
+              <input type="hidden" name="plant_id" value="<?= $cart_item['plant_id'] ?>">
+              <button type="submit" name="submit">
                 <i class="ph ph-x"></i>
-              </a>
+              </button>
               <p>Rp<?= number_format($subtotal) ?></p>
-            </div>
+            </form>
           </div>
           <!-- end checkuot item -->
           <hr />
         <?php endforeach; ?>
         <!-- checkuot item -->
-
         <!-- TOTAL -->
         <div class="checkout__item">
           <div class="checkout__item-left">
@@ -114,7 +115,7 @@ require('layouts/header.php');
         </div>
         <!-- end checkuot item -->
       </div>
-      <!-- METHODE PEMBAYARAN -->
+      <!-- payment methods -->
       <form action="./checkout.php" method="post" class="checkout__method">
         <div class="checkout__method-group">
           <h2 class="checkout__method-title">Metode Pembayaran <span class="text-danger">*</span></h2>
@@ -123,6 +124,7 @@ require('layouts/header.php');
             <?php foreach ($payment_methods as $payment_method) : ?>
               <label>
                 <input type="radio" name="payment_method_id" value="<?= $payment_method['payment_method_id'] ?>" />
+                <span></span>
                 <i class="ph-fill ph-check-circle"></i>
                 <img src="./assets/img/banks/<?= $payment_method['payment_method_logo'] ?>" alt="<?= $payment_method['payment_method_bank'] ?>" />
               </label>
@@ -143,10 +145,8 @@ require('layouts/header.php');
 </main>
 <!-- end content -->
 
-<!-- js customs -->
-<script src="./assets/js/checkout.js"></script>
-
 <?php
+
 // FOOTER
 require('layouts/footer.php');
 
