@@ -133,6 +133,8 @@ require('layouts/header.php');
                 echo "<td>$totalquantity</td>";
               } else if ($don == 4) { //kolom 4 untuk total harga produk
                 echo "<td>Rp" . number_format($totalprice) . "</td>";
+              } else if ($don == 5) { //kolom 5 untuk total transaksi
+                echo "<td>" . $drop - 1 . " Transaksi</td>";
               } else { //kosong, untuk tabel tanpa jumlah total
                 echo '<td> </td>';
               }
