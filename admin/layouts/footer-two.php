@@ -18,8 +18,7 @@
     </div>
     <hr />
     <p class="footer__copyright">
-      Copyright &copy; 2023 FloraFavs. All Rights Reserved | Designed by
-      <a href="https://www.linkedin.com/in/shafygunawan/">Shafy Gunawan</a>
+      Copyright &copy; 2023 FloraFavs. All Rights Reserved
     </p>
   </div>
 </div>
