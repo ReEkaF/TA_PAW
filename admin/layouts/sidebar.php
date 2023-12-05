@@ -62,10 +62,18 @@
         </li>
       <?php endif; ?>
     </ul>
-    <a href="./unpaid-transactions.php" class="sidebar__cta">
-      Lihat transaksi belum lunas
-      <i class="ph ph-arrow-right"></i>
-    </a>
+    <?php if ($_SESSION['role_name'] == 'manager') : ?>
+      <a href="./manager-unpaid-transactions.php" class="sidebar__cta">
+        Lihat transaksi belum lunas
+        <i class="ph ph-arrow-right"></i>
+      </a>
+    <?php endif; ?>
+    <?php if ($_SESSION['role_name'] == 'administrator') : ?>
+      <a href="./unpaid-transactions.php" class="sidebar__cta">
+        Lihat transaksi belum lunas
+        <i class="ph ph-arrow-right"></i>
+      </a>
+    <?php endif; ?>
   </nav>
 </div>
 <!-- end sidebar -->
